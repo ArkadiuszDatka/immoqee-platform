@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "immoqee-platform/build",
     "ignore": [
       "firebase.json",
       "**/.*",
