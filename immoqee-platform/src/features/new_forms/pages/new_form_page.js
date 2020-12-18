@@ -14,7 +14,7 @@ class NewFormPage extends React.Component {
             <p>Proszę wpisać nazwę formularza</p>
             <input></input>
             <p>Elementy formularza</p>
-            <ListOfFormElements list={this.elements} />
+            <ListOfFormElements list={this.state.elements} />
         </div>
     }
 }

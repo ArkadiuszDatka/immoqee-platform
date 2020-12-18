@@ -2,7 +2,7 @@ import React from 'react';
 
 const ListOfFormElements = props => {
     return <div className="listOfElements">
-        {props.elements.name}
+        {props.list[0].name}
     </div>
 }
 
