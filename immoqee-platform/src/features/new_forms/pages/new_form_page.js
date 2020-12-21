@@ -14,6 +14,32 @@ const NewFormPage = () => {
   const [formData, setFormData] = useState([
     new InputFormDataModel("name", "desc", "hint"),
     new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new InputFormDataModel("name", "desc", "hint"),
+    new InputFormDataModel("name", "desc", "hint", "Select"),
   ]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
@@ -21,41 +47,37 @@ const NewFormPage = () => {
   return (
     <div className="newFormMainPage">
       <h1 className="newFormMainPageH1">Podaj nazwę formularza</h1>
-      <input className="newFormMainPageInput" placeholder="Nazwa"
+      <input
+        className="newFormMainPageInput"
+        placeholder="Nazwa"
         onChange={(e) => {
           setInputText(e.target.value);
-        }}/>
-
+        }}
+      />
       <h1 className="newFormMainPageH1">Elementy formularza</h1>
       <ListOfFormElements list={formData} />{" "}
-
       <div className="newFormMainPageButtonBar">
-      <button
-      className = "newFormMainPageAddButton"
-        onClick={() => {
-          // setFormData([
-          //   ...formData,
-          //   new InputFormDataModel("name", inputText, "hint", "Select"),
-          // ]);
-        }}
-      >Dodaj pole tekstowe</button>
-      <button
-      className = "newFormMainPageAddButton"
-        onClick={() => {}}
-      >Dodaj listę jednokrotnego wyboru
-      </button>
-      <button
-      className = "newFormMainPageAddButton"
-        onClick={() => {}}
-      >Dodaj listę wielokrotnego wyboru
-      </button>
-      <button
-      className = "newFormMainPageSaveButton"
-        onClick={() => {}}
-      >Zapisz
-      </button>
+        <button
+          className="newFormMainPageAddButton"
+          onClick={() => {
+            // setFormData([
+            //   ...formData,
+            //   new InputFormDataModel("name", inputText, "hint", "Select"),
+            // ]);
+          }}
+        >
+          Dodaj pole tekstowe
+        </button>
+        <button className="newFormMainPageAddButton" onClick={() => {}}>
+          Dodaj listę jednokrotnego wyboru
+        </button>
+        <button className="newFormMainPageAddButton" onClick={() => {}}>
+          Dodaj listę wielokrotnego wyboru
+        </button>
+        <button className="newFormMainPageSaveButton" onClick={() => {}}>
+          Zapisz
+        </button>
       </div>
-
     </div>
   );
 };
@@ -90,7 +112,7 @@ const NewFormPage = () => {
 //   }
 // }
 
-{/* <Select
+/* <Select
         isMulti
         className={"Select"}
         options={options}
@@ -106,6 +128,6 @@ const NewFormPage = () => {
       >
         X D
       </button>
-      <p>{selectItems}</p> */}
+      <p>{selectItems}</p> */
 
 export default NewFormPage;

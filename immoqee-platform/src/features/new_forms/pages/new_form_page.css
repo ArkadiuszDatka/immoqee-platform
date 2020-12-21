@@ -4,11 +4,16 @@
 }
 
 .newFormMainPage {
-  padding: 10%;
+  background-color: red;
 }
 
 .newFormMainPageButtonBar {
-  align-content: end;
+  background-color: teal;
+  position: fixed;
+  bottom: 15px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .newFormMainPageButton {
@@ -16,7 +21,7 @@
 }
 
 .newFormMainPageAddButton {
-  background-color: #35E1B8;
+  background-color: #35e1b8;
   border: none;
   border-radius: 12px;
   color: white;
@@ -30,7 +35,7 @@
 }
 
 .newFormMainPageSaveButton {
-  background-color: #E84646;
+  background-color: #e84646;
   border: none;
   border-radius: 12px;
   color: white;
@@ -50,7 +55,7 @@
 
 .newFormMainPageInput {
   width: 100%;
-  border: 2px solid #35E1B8;
+  border: 2px solid #35e1b8;
   padding: 8px 16px;
   border-radius: 12px;
 }
