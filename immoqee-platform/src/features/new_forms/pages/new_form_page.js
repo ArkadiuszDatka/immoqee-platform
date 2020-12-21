@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from "react-select";
 import "./new_form_page.css";
 import ListOfFormElements from "../components/list_of_form_elements";
@@ -25,6 +31,49 @@ const NewFormPage = () => {
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
 
+
+  const [openHeaderDialog, setOpenHeaderDialog] = React.useState(false);
+  const [openDescriptionDialog, setOpenDescriptionDialog] = React.useState(false);
+  const [openInputDialog, setOpenInputDialog] = React.useState(false);
+  const [openSingleChoiceListDialog, setOpenSingleChoiceListDialog] = React.useState(false);
+  const [openMultipleChoiceListDialog, setOpenMultipleChoiceListDialog] = React.useState(false);
+
+  const handleClickOpenHeaderDialog = () => {
+    setOpenHeaderDialog(true);
+  };
+  const handleCloseHeaderDialog = () => {
+    setOpenHeaderDialog(false);
+  };
+
+  const handleClickOpenDescriptionDialog = () => {
+    setOpenDescriptionDialog(true);
+  };
+  const handleCloseDescriptionDialog = () => {
+    setOpenDescriptionDialog(false);
+  };
+
+  const handleClickOpenInputDialog = () => {
+    setOpenInputDialog(true);
+  };
+  const handleCloseInputDialog = () => {
+    setOpenInputDialog(false);
+  };
+
+  const handleClickOpenSingleChoiceListDialog = () => {
+    setOpenSingleChoiceListDialog(true);
+  };
+  const handleCloseSingleChoiceListDialog = () => {
+    setOpenSingleChoiceListDialog(false);
+  };
+
+  const handleClickOpenMultipleChoiceListDialog = () => {
+    setOpenMultipleChoiceListDialog(true);
+  };
+  const handleCloseMultipleChoiceListDialog = () => {
+    setOpenMultipleChoiceListDialog(false);
+  };
+
+
   return (
     <div className="newFormMainPage">
       <h1 className="newFormMainPageH1">Podaj nazwę formularza</h1>
@@ -38,32 +87,106 @@ const NewFormPage = () => {
       <h1 className="newFormMainPageH1">Elementy formularza</h1>
       <ListOfFormElements list={formData} />{" "}
       <div className="newFormMainPageButtonBar">
-        <button className="newFormMainPageAddButton" onClick={() => {}}>
+        <button className="newFormMainPageAddButton" onClick={handleClickOpenHeaderDialog}>
           Dodaj nagłówek
         </button>
-        <button className="newFormMainPageAddButton" onClick={() => {}}>
+        <button className="newFormMainPageAddButton" onClick={handleClickOpenDescriptionDialog}>
           Dodaj opis
         </button>
         <button
-          className="newFormMainPageAddButton"
-          onClick={() => {
-            // setFormData([
-            //   ...formData,
-            //   new InputFormDataModel("name", inputText, "hint", "Select"),
-            // ]);
-          }}
-        >
+          className="newFormMainPageAddButton" onClick={handleClickOpenInputDialog}>
           Dodaj pole tekstowe
         </button>
-        <button className="newFormMainPageAddButton" onClick={() => {}}>
+        <button className="newFormMainPageAddButton" onClick={handleClickOpenSingleChoiceListDialog}>
           Dodaj listę jednokrotnego wyboru
         </button>
-        <button className="newFormMainPageAddButton" onClick={() => {}}>
+        <button className="newFormMainPageAddButton" onClick={handleClickOpenMultipleChoiceListDialog}>
           Dodaj listę wielokrotnego wyboru
         </button>
         <button className="newFormMainPageSaveButton" onClick={() => {}}>
           Zapisz
         </button>
+        
+        <Dialog
+          open={openHeaderDialog}
+          onClose={handleCloseHeaderDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Dodaj nagłówek"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              elementy nagłóka
+          </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseHeaderDialog}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openDescriptionDialog}
+          onClose={handleCloseDescriptionDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Dodaj opis"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              elementy opisu
+          </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDescriptionDialog}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openInputDialog}
+          onClose={handleCloseInputDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Dodaj pole tekstowe"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              elementy pola tekstowego
+          </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseInputDialog}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openSingleChoiceListDialog}
+          onClose={handleCloseSingleChoiceListDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Dodaj listę jednokrotnego wyboru"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              elementy listy jednokrotnego wyboru
+          </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseSingleChoiceListDialog}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openMultipleChoiceListDialog}
+          onClose={handleCloseMultipleChoiceListDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Dodaj listę wielokrotnego wyboru"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              elementy listy wielokrotnego wyboru
+          </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseMultipleChoiceListDialog}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </div>
   );
