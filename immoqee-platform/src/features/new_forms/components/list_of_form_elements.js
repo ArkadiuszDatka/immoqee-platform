@@ -18,7 +18,6 @@ const ListOfFormElements = (props) => {
           </div>
         );
       })}
-      <div className="newLine">xd</div>
     </div>
   );
 };

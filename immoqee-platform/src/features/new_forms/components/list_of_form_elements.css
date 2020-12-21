@@ -1,7 +1,8 @@
 .listOfElements {
   display: flex;
   flex-wrap: wrap;
-  background-color: green;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 .listOfElementsCard {
   background-color: #35e1b8;
