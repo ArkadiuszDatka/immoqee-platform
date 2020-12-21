@@ -7,10 +7,6 @@ const ListOfFormElements = (props) => {
     setData(props.list);
   }, [props]);
 
-  const logg = () => {
-    console.log(data);
-  };
-
   return (
     <div className="listOfElements">
       {data.map((item, i) => {
