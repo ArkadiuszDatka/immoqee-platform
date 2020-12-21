@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import Select from "react-select";
 import "./new_form_page.css";
 import ListOfFormElements from "../components/list_of_form_elements";
-import InputFormDataModel from "../../../core/data_model/input_form_data_model";
+import HeaderDataModel from "../../../core/data_model/header_data_model";
+import DescriptionDataModel from "../../../core/data_model/description_data_model";
+import InputDataModel from "../../../core/data_model/input_data_model";
+import SingleChoiceListDataModel from "../../../core/data_model/single_choice_list_data_model";
+import MultipleChoiceListDataModel from "../../../core/data_model/multiple_choice_list_data_model";
 
 const NewFormPage = () => {
   const options = [
@@ -12,34 +16,11 @@ const NewFormPage = () => {
   ];
 
   const [formData, setFormData] = useState([
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
+    new HeaderDataModel("val", "header"),
+    new DescriptionDataModel("val", "description"),
+    new InputDataModel("val", "input", "desc", "hint"),
+    new SingleChoiceListDataModel("val", [], "single", "desc"),
+    new MultipleChoiceListDataModel("val", [], "multi", "desc"),
   ]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
@@ -57,6 +38,12 @@ const NewFormPage = () => {
       <h1 className="newFormMainPageH1">Elementy formularza</h1>
       <ListOfFormElements list={formData} />{" "}
       <div className="newFormMainPageButtonBar">
+        <button className="newFormMainPageAddButton" onClick={() => {}}>
+          Dodaj nagłówek
+        </button>
+        <button className="newFormMainPageAddButton" onClick={() => {}}>
+          Dodaj opis
+        </button>
         <button
           className="newFormMainPageAddButton"
           onClick={() => {
