@@ -2,3 +2,55 @@
   width: fit-content;
   background-color: aqua;
 }
+
+.newFormMainPage {
+  padding: 10%;
+}
+
+.newFormMainPageButtonBar {
+  align-content: end;
+}
+
+.newFormMainPageButton {
+  margin-left: 20;
+}
+
+.newFormMainPageAddButton {
+  background-color: #35E1B8;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  cursor: pointer;
+}
+
+.newFormMainPageSaveButton {
+  background-color: #E84646;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  cursor: pointer;
+}
+
+.newFormMainPageH1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.newFormMainPageInput {
+  width: 100%;
+  border: 2px solid #35E1B8;
+  padding: 8px 16px;
+  border-radius: 12px;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./list_of_form_elements.css"
 
 const ListOfFormElements = (props) => {
   const [data, setData] = useState(props.list);
@@ -11,16 +12,13 @@ const ListOfFormElements = (props) => {
     <div className="listOfElements">
       {data.map((item, i) => {
         return (
-          <div>
-            <ul>
-              <li>{item.name}</li>
-              <li>{item.desc}</li>
-              <li>{item.hint}</li>
-              <li>{item.type}</li>
-            </ul>
+          <div className="listOfElementsCard">
+          <h3>{item.type}</h3>
+          <p>{item.name}</p>
           </div>
         );
       })}
+      <div className="newLine">qwe</div>
     </div>
   );
 };

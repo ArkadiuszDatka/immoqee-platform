@@ -19,32 +19,43 @@ const NewFormPage = () => {
   const [inputText, setInputText] = useState("");
 
   return (
-    <div>
-      <p>Proszę wpisać nazwę formularza</p>
-      <input
+    <div className="newFormMainPage">
+      <h1 className="newFormMainPageH1">Podaj nazwę formularza</h1>
+      <input className="newFormMainPageInput" placeholder="Nazwa"
         onChange={(e) => {
           setInputText(e.target.value);
-        }}
-      />
-      <Select
-        isMulti
-        className={"Select"}
-        options={options}
-        onInputChange={(data) => setSelectItems(data)}
-      />
-      <button
-        onClick={() => {
-          setFormData([
-            ...formData,
-            new InputFormDataModel("name", inputText, "hint", "Select"),
-          ]);
-        }}
-      >
-        X D
-      </button>
-      <p>{selectItems}</p>
-      <p>Elementy formularza</p>
+        }}/>
+
+      <h1 className="newFormMainPageH1">Elementy formularza</h1>
       <ListOfFormElements list={formData} />{" "}
+
+      <div className="newFormMainPageButtonBar">
+      <button
+      className = "newFormMainPageAddButton"
+        onClick={() => {
+          // setFormData([
+          //   ...formData,
+          //   new InputFormDataModel("name", inputText, "hint", "Select"),
+          // ]);
+        }}
+      >Dodaj pole tekstowe</button>
+      <button
+      className = "newFormMainPageAddButton"
+        onClick={() => {}}
+      >Dodaj listę jednokrotnego wyboru
+      </button>
+      <button
+      className = "newFormMainPageAddButton"
+        onClick={() => {}}
+      >Dodaj listę wielokrotnego wyboru
+      </button>
+      <button
+      className = "newFormMainPageSaveButton"
+        onClick={() => {}}
+      >Zapisz
+      </button>
+      </div>
+
     </div>
   );
 };
@@ -78,5 +89,23 @@ const NewFormPage = () => {
 //     );
 //   }
 // }
+
+{/* <Select
+        isMulti
+        className={"Select"}
+        options={options}
+        onInputChange={(data) => setSelectItems(data)}
+      />
+      <button
+        onClick={() => {
+          setFormData([
+            ...formData,
+            new InputFormDataModel("name", inputText, "hint", "Select"),
+          ]);
+        }}
+      >
+        X D
+      </button>
+      <p>{selectItems}</p> */}
 
 export default NewFormPage;

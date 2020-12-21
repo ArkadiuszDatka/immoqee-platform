@@ -1,0 +1,16 @@
+.listOfElements {
+}
+.listOfElementsCard {
+    background-color: #35E1B8;
+    padding: 20px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 20px;
+    width: min-content;
+    float: left;
+    color: white;
+}
+
+.newLine {
+    float: bottom;
+}
