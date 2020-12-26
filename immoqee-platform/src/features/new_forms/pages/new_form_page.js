@@ -14,6 +14,8 @@ import InputDataModel from "../../../core/data_model/input_data_model";
 import SingleChoiceListDataModel from "../../../core/data_model/single_choice_list_data_model";
 import MultipleChoiceListDataModel from "../../../core/data_model/multiple_choice_list_data_model";
 
+
+
 const NewFormPage = () => {
   const options = [
     { value: "Język Angielski", label: "Język Angielsk" },
@@ -74,8 +76,6 @@ const NewFormPage = () => {
     setOpenMultipleChoiceListDialog(false);
   };
 
-  HeaderDataModel newHeader = new HeaderDataModel("", "");
-
   return (
     <div className="newFormMainPage">
       <h1 className="newFormMainPageH1">Podaj nazwę formularza</h1>
@@ -116,18 +116,13 @@ const NewFormPage = () => {
         >
           <DialogTitle>{"Dodaj nagłówek"}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              <div>
-                <input
-                  className="newFormMainPageInput"
-                  placeholder={newHeader.hint}
-                  onChange={(e) => {
-                    headerSetInputText(e.target.value);
-                    newHeader.name = e.target.value;
-                  }} />
-              </div>
-              elementy nagłóka
-          </DialogContentText>
+            <input
+              className="newFormMainPageInput"
+              placeholder={"nagłówek"}
+              onChange={(e) => {
+                // headerSetInputText(e.target.value);
+                // newHeader.name = e.target.value;
+              }} />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseHeaderDialog}>Dodaj</Button>
@@ -137,13 +132,13 @@ const NewFormPage = () => {
           open={openDescriptionDialog}
           onClose={handleCloseDescriptionDialog}
           aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
+          aria-describedby="alert-dialog-description">
           <DialogTitle>{"Dodaj opis"}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              elementy opisu
-          </DialogContentText>
+            <input
+              className="newFormMainPageInput"
+              placeholder="opis"
+              onChange={(e) => { }} />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseDescriptionDialog}>Dodaj</Button>
@@ -153,13 +148,17 @@ const NewFormPage = () => {
           open={openInputDialog}
           onClose={handleCloseInputDialog}
           aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
+          aria-describedby="alert-dialog-description">
           <DialogTitle>{"Dodaj pole tekstowe"}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              elementy pola tekstowego
-          </DialogContentText>
+            <input
+              className="newFormMainPageInput"
+              placeholder="nazwa"
+              onChange={(e) => { }} />
+            <input
+              className="newFormMainPageInput"
+              placeholder="opis"
+              onChange={(e) => { }} />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseInputDialog}>Dodaj</Button>
@@ -169,13 +168,14 @@ const NewFormPage = () => {
           open={openSingleChoiceListDialog}
           onClose={handleCloseSingleChoiceListDialog}
           aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
+          aria-describedby="alert-dialog-description">
           <DialogTitle>{"Dodaj listę jednokrotnego wyboru"}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              elementy listy jednokrotnego wyboru
-          </DialogContentText>
+            <input
+              className="newFormMainPageInput"
+              placeholder="nazwa"
+              onChange={(e) => { }} />
+
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseSingleChoiceListDialog}>Dodaj</Button>
@@ -189,9 +189,10 @@ const NewFormPage = () => {
         >
           <DialogTitle>{"Dodaj listę wielokrotnego wyboru"}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              elementy listy wielokrotnego wyboru
-          </DialogContentText>
+            <input
+              className="newFormMainPageInput"
+              placeholder="nazwa"
+              onChange={(e) => { }} />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseMultipleChoiceListDialog}>Dodaj</Button>
