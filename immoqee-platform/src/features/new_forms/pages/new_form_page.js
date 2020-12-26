@@ -31,6 +31,7 @@ const NewFormPage = () => {
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
 
+  const [headerInputText, headerSetInputText] = useState("");
 
   const [openHeaderDialog, setOpenHeaderDialog] = React.useState(false);
   const [openDescriptionDialog, setOpenDescriptionDialog] = React.useState(false);
@@ -73,6 +74,7 @@ const NewFormPage = () => {
     setOpenMultipleChoiceListDialog(false);
   };
 
+  HeaderDataModel newHeader = new HeaderDataModel("", "");
 
   return (
     <div className="newFormMainPage">
@@ -82,8 +84,7 @@ const NewFormPage = () => {
         placeholder="Nazwa"
         onChange={(e) => {
           setInputText(e.target.value);
-        }}
-      />
+        }} />
       <h1 className="newFormMainPageH1">Elementy formularza</h1>
       <ListOfFormElements list={formData} />{" "}
       <div className="newFormMainPageButtonBar">
@@ -103,10 +104,10 @@ const NewFormPage = () => {
         <button className="newFormMainPageAddButton" onClick={handleClickOpenMultipleChoiceListDialog}>
           Dodaj listę wielokrotnego wyboru
         </button>
-        <button className="newFormMainPageSaveButton" onClick={() => {}}>
+        <button className="newFormMainPageSaveButton" onClick={() => { }}>
           Zapisz
         </button>
-        
+
         <Dialog
           open={openHeaderDialog}
           onClose={handleCloseHeaderDialog}
@@ -116,6 +117,15 @@ const NewFormPage = () => {
           <DialogTitle>{"Dodaj nagłówek"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
+              <div>
+                <input
+                  className="newFormMainPageInput"
+                  placeholder={newHeader.hint}
+                  onChange={(e) => {
+                    headerSetInputText(e.target.value);
+                    newHeader.name = e.target.value;
+                  }} />
+              </div>
               elementy nagłóka
           </DialogContentText>
           </DialogContent>
