@@ -63,3 +63,22 @@
 .newFormMainPageInput:focus {
   outline: none;
 }
+
+.newItemInput {
+  width: 100%;
+  border: 2px solid #35e1b8;
+  padding: 8px 16px;
+  border-radius: 12px;
+  height: min-content;
+}
+.newItemInput:focus {
+  outline: none;
+}
+
+.newItemInputComponent{
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+}

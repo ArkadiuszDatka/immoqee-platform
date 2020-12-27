@@ -1,5 +1,5 @@
 import React, { useState, Component } from "react";
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'; import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -13,12 +13,14 @@ import DescriptionDataModel from "../../../core/data_model/description_data_mode
 import InputDataModel from "../../../core/data_model/input_data_model";
 import SingleChoiceListDataModel from "../../../core/data_model/single_choice_list_data_model";
 import MultipleChoiceListDataModel from "../../../core/data_model/multiple_choice_list_data_model";
-import CreatableSelect from 'react-select/creatable';
-
-
+import ListOfItems from "../components/list_of_items";
+import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
+import { colors } from "@material-ui/core";
 
 const NewFormPage = () => {
   const [formData, setFormData] = useState([]);
+  const [listItemsData, setListItemsData] = useState([]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
 
@@ -29,8 +31,10 @@ const NewFormPage = () => {
   const [inputHintInputText, inputHintSetInputText] = useState("");
   const [singleChoiceListNameInputText, singleChoiceListNameSetInputText] = useState("");
   const [singleChoiceListDescInputText, singleChoiceListDescSetInputText] = useState("");
+  const [singleChoiceListNewItemInputText, singleChoiceListNewItemSetInputText] = useState("");
   const [multipleChoiceListNameInputText, multipleChoiceListNameSetInputText] = useState("");
   const [multipleChoiceListDescInputText, multipleChoiceListDescSetInputText] = useState("");
+  const [multipleChoiceListNewItemInputText, multipleChoiceListNewItemSetInputText] = useState("");
 
   const [openHeaderDialog, setOpenHeaderDialog] = React.useState(false);
   const [openDescriptionDialog, setOpenDescriptionDialog] = React.useState(false);
@@ -80,6 +84,7 @@ const NewFormPage = () => {
       ...formData,
       new SingleChoiceListDataModel("", list, name, desc),
     ]);
+    setListItemsData([]);
   };
 
   const handleClickOpenMultipleChoiceListDialog = () => {
@@ -91,9 +96,8 @@ const NewFormPage = () => {
       ...formData,
       new MultipleChoiceListDataModel("", list, name, desc),
     ]);
+    setListItemsData([]);
   };
-
-  const handleChange = (newValue, actionMeta) => {}
 
   return (
     <div className="newFormMainPage">
@@ -212,14 +216,29 @@ const NewFormPage = () => {
               onChange={(e) => {
                 singleChoiceListDescSetInputText(e.target.value);
               }} />
-            <CreatableSelect
-              isMulti
-              onChange={(value) => handleChange(value,value)}
-              options={[]}
-            />
+            <div className="newItemInputComponent">
+              <input
+                className="newItemInput"
+                placeholder="element listy"
+                onChange={(e) => {
+                  singleChoiceListNewItemSetInputText(e.target.value);
+                }} />
+              <IconButton
+                style={{ color: colors.grey }}
+                aria-label="Dodaj"
+                onClick={(e) => {
+                  setListItemsData([
+                    ...listItemsData,
+                    singleChoiceListNewItemInputText
+                  ]);
+                }}>
+                <AddIcon />
+              </IconButton>
+            </div>
+            <ListOfItems list={listItemsData} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => handleCloseSingleChoiceListDialog([], singleChoiceListNameInputText, singleChoiceListDescInputText)}>Dodaj</Button>
+            <Button onClick={() => handleCloseSingleChoiceListDialog(listItemsData, singleChoiceListNameInputText, singleChoiceListDescInputText)}>Dodaj</Button>
           </DialogActions>
         </Dialog>
         <Dialog
@@ -242,9 +261,29 @@ const NewFormPage = () => {
               onChange={(e) => {
                 multipleChoiceListDescSetInputText(e.target.value);
               }} />
+            <div className="newItemInputComponent">
+              <input
+                className="newItemInput"
+                placeholder="element listy"
+                onChange={(e) => {
+                  multipleChoiceListNewItemSetInputText(e.target.value);
+                }} />
+              <IconButton
+                style={{ color: colors.grey }}
+                aria-label="Dodaj"
+                onClick={(e) => {
+                  setListItemsData([
+                    ...listItemsData,
+                    multipleChoiceListNewItemInputText
+                  ]);
+                }}>
+                <AddIcon />
+              </IconButton>
+            </div>
+            <ListOfItems list={listItemsData} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => handleCloseMultipleChoiceListDialog([], multipleChoiceListNameInputText, multipleChoiceListDescInputText)}>Dodaj</Button>
+            <Button onClick={() => handleCloseMultipleChoiceListDialog(listItemsData, multipleChoiceListNameInputText, multipleChoiceListDescInputText)}>Dodaj</Button>
           </DialogActions>
         </Dialog>
       </div>
