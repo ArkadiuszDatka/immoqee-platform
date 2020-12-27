@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -13,16 +13,11 @@ import DescriptionDataModel from "../../../core/data_model/description_data_mode
 import InputDataModel from "../../../core/data_model/input_data_model";
 import SingleChoiceListDataModel from "../../../core/data_model/single_choice_list_data_model";
 import MultipleChoiceListDataModel from "../../../core/data_model/multiple_choice_list_data_model";
+import CreatableSelect from 'react-select/creatable';
 
 
 
 const NewFormPage = () => {
-  const options = [
-    { value: "Język Angielski", label: "Język Angielsk" },
-    { value: "Język Niemiecki", label: "Język Niemiecki" },
-    { value: "Język Rosyjski", label: "Język Rosyjski" },
-  ];
-
   const [formData, setFormData] = useState([]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
@@ -98,6 +93,8 @@ const NewFormPage = () => {
     ]);
   };
 
+  const handleChange = (newValue, actionMeta) => {}
+
   return (
     <div className="newFormMainPage">
       <h1 className="newFormMainPageH1">Podaj nazwę formularza</h1>
@@ -160,7 +157,7 @@ const NewFormPage = () => {
               placeholder="opis"
               onChange={(e) => {
                 descriptionSetInputText(e.target.value);
-               }} />
+              }} />
           </DialogContent>
           <DialogActions>
             <Button onClick={() => handleCloseDescriptionDialog(descriptionInputText)}>Dodaj</Button>
@@ -176,7 +173,7 @@ const NewFormPage = () => {
             <input
               className="newFormMainPageInput"
               placeholder="nazwa"
-              onChange={(e) => { 
+              onChange={(e) => {
                 inputNameSetInputText(e.target.value);
               }} />
             <input
@@ -184,13 +181,13 @@ const NewFormPage = () => {
               placeholder="opis"
               onChange={(e) => {
                 inputDescSetInputText(e.target.value);
-               }} />
+              }} />
             <input
               className="newFormMainPageInput"
               placeholder="tekst wypełnienia"
               onChange={(e) => {
                 inputHintSetInputText(e.target.value);
-               }} />
+              }} />
           </DialogContent>
           <DialogActions>
             <Button onClick={() => handleCloseInputDialog(inputNameInputText, inputDescInputText, inputHintInputText)}>Dodaj</Button>
@@ -215,6 +212,11 @@ const NewFormPage = () => {
               onChange={(e) => {
                 singleChoiceListDescSetInputText(e.target.value);
               }} />
+            <CreatableSelect
+              isMulti
+              onChange={(value) => handleChange(value,value)}
+              options={[]}
+            />
           </DialogContent>
           <DialogActions>
             <Button onClick={() => handleCloseSingleChoiceListDialog([], singleChoiceListNameInputText, singleChoiceListDescInputText)}>Dodaj</Button>
@@ -228,7 +230,7 @@ const NewFormPage = () => {
         >
           <DialogTitle>{"Dodaj listę wielokrotnego wyboru"}</DialogTitle>
           <DialogContent>
-          <input
+            <input
               className="newFormMainPageInput"
               placeholder="nazwa"
               onChange={(e) => {
