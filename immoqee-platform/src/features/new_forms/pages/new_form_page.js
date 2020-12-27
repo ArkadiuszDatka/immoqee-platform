@@ -23,17 +23,19 @@ const NewFormPage = () => {
     { value: "Język Rosyjski", label: "Język Rosyjski" },
   ];
 
-  const [formData, setFormData] = useState([
-    new HeaderDataModel("val", "header"),
-    new DescriptionDataModel("val", "description"),
-    new InputDataModel("val", "input", "desc", "hint"),
-    new SingleChoiceListDataModel("val", [], "single", "desc"),
-    new MultipleChoiceListDataModel("val", [], "multi", "desc"),
-  ]);
+  const [formData, setFormData] = useState([]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
 
   const [headerInputText, headerSetInputText] = useState("");
+  const [descriptionInputText, descriptionSetInputText] = useState("");
+  const [inputNameInputText, inputNameSetInputText] = useState("");
+  const [inputDescInputText, inputDescSetInputText] = useState("");
+  const [inputHintInputText, inputHintSetInputText] = useState("");
+  const [singleChoiceListNameInputText, singleChoiceListNameSetInputText] = useState("");
+  const [singleChoiceListDescInputText, singleChoiceListDescSetInputText] = useState("");
+  const [multipleChoiceListNameInputText, multipleChoiceListNameSetInputText] = useState("");
+  const [multipleChoiceListDescInputText, multipleChoiceListDescSetInputText] = useState("");
 
   const [openHeaderDialog, setOpenHeaderDialog] = React.useState(false);
   const [openDescriptionDialog, setOpenDescriptionDialog] = React.useState(false);
@@ -44,43 +46,62 @@ const NewFormPage = () => {
   const handleClickOpenHeaderDialog = () => {
     setOpenHeaderDialog(true);
   };
-  const handleCloseHeaderDialog = () => {
+  const handleCloseHeaderDialog = (name) => {
     setOpenHeaderDialog(false);
+    setFormData([
+      ...formData,
+      new HeaderDataModel("", name),
+    ]);
   };
 
   const handleClickOpenDescriptionDialog = () => {
     setOpenDescriptionDialog(true);
   };
-  const handleCloseDescriptionDialog = () => {
+  const handleCloseDescriptionDialog = (name) => {
     setOpenDescriptionDialog(false);
+    setFormData([
+      ...formData,
+      new DescriptionDataModel("", name),
+    ]);
   };
 
   const handleClickOpenInputDialog = () => {
     setOpenInputDialog(true);
   };
-  const handleCloseInputDialog = () => {
+  const handleCloseInputDialog = (name, desc, hint) => {
     setOpenInputDialog(false);
+    setFormData([
+      ...formData,
+      new InputDataModel("", name, desc, hint),
+    ]);
   };
 
   const handleClickOpenSingleChoiceListDialog = () => {
     setOpenSingleChoiceListDialog(true);
   };
-  const handleCloseSingleChoiceListDialog = () => {
+  const handleCloseSingleChoiceListDialog = (list, name, desc) => {
     setOpenSingleChoiceListDialog(false);
+    setFormData([
+      ...formData,
+      new SingleChoiceListDataModel("", list, name, desc),
+    ]);
   };
 
   const handleClickOpenMultipleChoiceListDialog = () => {
     setOpenMultipleChoiceListDialog(true);
   };
-  const handleCloseMultipleChoiceListDialog = () => {
+  const handleCloseMultipleChoiceListDialog = (list, name, desc) => {
     setOpenMultipleChoiceListDialog(false);
+    setFormData([
+      ...formData,
+      new MultipleChoiceListDataModel("", list, name, desc),
+    ]);
   };
 
   return (
     <div className="newFormMainPage">
       <h1 className="newFormMainPageH1">Podaj nazwę formularza</h1>
-      <input
-        className="newFormMainPageInput"
+      <input className="newFormMainPageInput"
         placeholder="Nazwa"
         onChange={(e) => {
           setInputText(e.target.value);
@@ -120,12 +141,11 @@ const NewFormPage = () => {
               className="newFormMainPageInput"
               placeholder={"nagłówek"}
               onChange={(e) => {
-                // headerSetInputText(e.target.value);
-                // newHeader.name = e.target.value;
+                headerSetInputText(e.target.value);
               }} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseHeaderDialog}>Dodaj</Button>
+            <Button onClick={() => handleCloseHeaderDialog(headerInputText)}>Dodaj</Button>
           </DialogActions>
         </Dialog>
         <Dialog
@@ -138,10 +158,12 @@ const NewFormPage = () => {
             <input
               className="newFormMainPageInput"
               placeholder="opis"
-              onChange={(e) => { }} />
+              onChange={(e) => {
+                descriptionSetInputText(e.target.value);
+               }} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseDescriptionDialog}>Dodaj</Button>
+            <Button onClick={() => handleCloseDescriptionDialog(descriptionInputText)}>Dodaj</Button>
           </DialogActions>
         </Dialog>
         <Dialog
@@ -154,14 +176,24 @@ const NewFormPage = () => {
             <input
               className="newFormMainPageInput"
               placeholder="nazwa"
-              onChange={(e) => { }} />
+              onChange={(e) => { 
+                inputNameSetInputText(e.target.value);
+              }} />
             <input
               className="newFormMainPageInput"
               placeholder="opis"
-              onChange={(e) => { }} />
+              onChange={(e) => {
+                inputDescSetInputText(e.target.value);
+               }} />
+            <input
+              className="newFormMainPageInput"
+              placeholder="tekst wypełnienia"
+              onChange={(e) => {
+                inputHintSetInputText(e.target.value);
+               }} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseInputDialog}>Dodaj</Button>
+            <Button onClick={() => handleCloseInputDialog(inputNameInputText, inputDescInputText, inputHintInputText)}>Dodaj</Button>
           </DialogActions>
         </Dialog>
         <Dialog
@@ -174,11 +206,18 @@ const NewFormPage = () => {
             <input
               className="newFormMainPageInput"
               placeholder="nazwa"
-              onChange={(e) => { }} />
-
+              onChange={(e) => {
+                singleChoiceListNameSetInputText(e.target.value);
+              }} />
+            <input
+              className="newFormMainPageInput"
+              placeholder="opis"
+              onChange={(e) => {
+                singleChoiceListDescSetInputText(e.target.value);
+              }} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseSingleChoiceListDialog}>Dodaj</Button>
+            <Button onClick={() => handleCloseSingleChoiceListDialog([], singleChoiceListNameInputText, singleChoiceListDescInputText)}>Dodaj</Button>
           </DialogActions>
         </Dialog>
         <Dialog
@@ -189,13 +228,21 @@ const NewFormPage = () => {
         >
           <DialogTitle>{"Dodaj listę wielokrotnego wyboru"}</DialogTitle>
           <DialogContent>
-            <input
+          <input
               className="newFormMainPageInput"
               placeholder="nazwa"
-              onChange={(e) => { }} />
+              onChange={(e) => {
+                multipleChoiceListNameSetInputText(e.target.value);
+              }} />
+            <input
+              className="newFormMainPageInput"
+              placeholder="opis"
+              onChange={(e) => {
+                multipleChoiceListDescSetInputText(e.target.value);
+              }} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseMultipleChoiceListDialog}>Dodaj</Button>
+            <Button onClick={() => handleCloseMultipleChoiceListDialog([], multipleChoiceListNameInputText, multipleChoiceListDescInputText)}>Dodaj</Button>
           </DialogActions>
         </Dialog>
       </div>
