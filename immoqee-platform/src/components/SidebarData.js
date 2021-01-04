@@ -1,6 +1,7 @@
 import React from "react";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
+import * as FaIcons from "react-icons/fa";
 
 export const SidebarData = [
   {
@@ -19,6 +20,12 @@ export const SidebarData = [
     title: "Dodaj formularz",
     path: "/create_form",
     icon: <IoIcons.IoIosAddCircle />,
+    cName: "nav-text",
+  },
+  {
+    title: "Wyloguj się",
+    path: "/logout",
+    icon: <FaIcons.FaDoorOpen />,
     cName: "nav-text",
   },
 ];
