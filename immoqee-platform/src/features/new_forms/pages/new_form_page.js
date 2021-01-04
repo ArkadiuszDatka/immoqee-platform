@@ -1,50 +1,292 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
+import Button from '@material-ui/core/Button'; import IconButton from '@material-ui/core/IconButton';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from "react-select";
 import "./new_form_page.css";
 import ListOfFormElements from "../components/list_of_form_elements";
-import InputFormDataModel from "../../../core/data_model/input_form_data_model";
+import HeaderDataModel from "../../../core/data_model/header_data_model";
+import DescriptionDataModel from "../../../core/data_model/description_data_model";
+import InputDataModel from "../../../core/data_model/input_data_model";
+import SingleChoiceListDataModel from "../../../core/data_model/single_choice_list_data_model";
+import MultipleChoiceListDataModel from "../../../core/data_model/multiple_choice_list_data_model";
+import ListOfItems from "../components/list_of_items";
+import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
+import { colors } from "@material-ui/core";
 
 const NewFormPage = () => {
-  const options = [
-    { value: "Język Angielski", label: "Język Angielsk" },
-    { value: "Język Niemiecki", label: "Język Niemiecki" },
-    { value: "Język Rosyjski", label: "Język Rosyjski" },
-  ];
-
-  const [formData, setFormData] = useState([
-    new InputFormDataModel("name", "desc", "hint"),
-    new InputFormDataModel("name", "desc", "hint", "Select"),
-  ]);
+  const [formData, setFormData] = useState([]);
+  const [listItemsData, setListItemsData] = useState([]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
 
+  const [headerInputText, headerSetInputText] = useState("");
+  const [descriptionInputText, descriptionSetInputText] = useState("");
+  const [inputNameInputText, inputNameSetInputText] = useState("");
+  const [inputDescInputText, inputDescSetInputText] = useState("");
+  const [inputHintInputText, inputHintSetInputText] = useState("");
+  const [singleChoiceListNameInputText, singleChoiceListNameSetInputText] = useState("");
+  const [singleChoiceListDescInputText, singleChoiceListDescSetInputText] = useState("");
+  const [singleChoiceListNewItemInputText, singleChoiceListNewItemSetInputText] = useState("");
+  const [multipleChoiceListNameInputText, multipleChoiceListNameSetInputText] = useState("");
+  const [multipleChoiceListDescInputText, multipleChoiceListDescSetInputText] = useState("");
+  const [multipleChoiceListNewItemInputText, multipleChoiceListNewItemSetInputText] = useState("");
+
+  const [openHeaderDialog, setOpenHeaderDialog] = React.useState(false);
+  const [openDescriptionDialog, setOpenDescriptionDialog] = React.useState(false);
+  const [openInputDialog, setOpenInputDialog] = React.useState(false);
+  const [openSingleChoiceListDialog, setOpenSingleChoiceListDialog] = React.useState(false);
+  const [openMultipleChoiceListDialog, setOpenMultipleChoiceListDialog] = React.useState(false);
+
+  const handleClickOpenHeaderDialog = () => {
+    setOpenHeaderDialog(true);
+  };
+  const handleCloseHeaderDialog = (name) => {
+    setOpenHeaderDialog(false);
+    setFormData([
+      ...formData,
+      new HeaderDataModel("", name),
+    ]);
+  };
+
+  const handleClickOpenDescriptionDialog = () => {
+    setOpenDescriptionDialog(true);
+  };
+  const handleCloseDescriptionDialog = (name) => {
+    setOpenDescriptionDialog(false);
+    setFormData([
+      ...formData,
+      new DescriptionDataModel("", name),
+    ]);
+  };
+
+  const handleClickOpenInputDialog = () => {
+    setOpenInputDialog(true);
+  };
+  const handleCloseInputDialog = (name, desc, hint) => {
+    setOpenInputDialog(false);
+    setFormData([
+      ...formData,
+      new InputDataModel("", name, desc, hint),
+    ]);
+  };
+
+  const handleClickOpenSingleChoiceListDialog = () => {
+    setOpenSingleChoiceListDialog(true);
+  };
+  const handleCloseSingleChoiceListDialog = (list, name, desc) => {
+    setOpenSingleChoiceListDialog(false);
+    setFormData([
+      ...formData,
+      new SingleChoiceListDataModel("", list, name, desc),
+    ]);
+    setListItemsData([]);
+  };
+
+  const handleClickOpenMultipleChoiceListDialog = () => {
+    setOpenMultipleChoiceListDialog(true);
+  };
+  const handleCloseMultipleChoiceListDialog = (list, name, desc) => {
+    setOpenMultipleChoiceListDialog(false);
+    setFormData([
+      ...formData,
+      new MultipleChoiceListDataModel("", list, name, desc),
+    ]);
+    setListItemsData([]);
+  };
+
   return (
-    <div>
-      <p>Proszę wpisać nazwę formularza</p>
-      <input
+    <div className="newFormMainPage">
+      <h1 className="newFormMainPageH1">Podaj nazwę formularza</h1>
+      <input className="newFormMainPageInput"
+        placeholder="Nazwa"
         onChange={(e) => {
           setInputText(e.target.value);
-        }}
-      />
-      <Select
-        isMulti
-        className={"Select"}
-        options={options}
-        onInputChange={(data) => setSelectItems(data)}
-      />
-      <button
-        onClick={() => {
-          setFormData([
-            ...formData,
-            new InputFormDataModel("name", inputText, "hint", "Select"),
-          ]);
-        }}
-      >
-        X D
-      </button>
-      <p>{selectItems}</p>
-      <p>Elementy formularza</p>
+        }} />
+      <h1 className="newFormMainPageH1">Elementy formularza</h1>
       <ListOfFormElements list={formData} />{" "}
+      <div className="newFormMainPageButtonBar">
+        <button className="newFormMainPageAddButton" onClick={handleClickOpenHeaderDialog}>
+          Dodaj nagłówek
+        </button>
+        <button className="newFormMainPageAddButton" onClick={handleClickOpenDescriptionDialog}>
+          Dodaj opis
+        </button>
+        <button
+          className="newFormMainPageAddButton" onClick={handleClickOpenInputDialog}>
+          Dodaj pole tekstowe
+        </button>
+        <button className="newFormMainPageAddButton" onClick={handleClickOpenSingleChoiceListDialog}>
+          Dodaj listę jednokrotnego wyboru
+        </button>
+        <button className="newFormMainPageAddButton" onClick={handleClickOpenMultipleChoiceListDialog}>
+          Dodaj listę wielokrotnego wyboru
+        </button>
+        <button className="newFormMainPageSaveButton" onClick={() => { }}>
+          Zapisz
+        </button>
+
+        <Dialog
+          open={openHeaderDialog}
+          onClose={handleCloseHeaderDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Dodaj nagłówek"}</DialogTitle>
+          <DialogContent>
+            <input
+              className="newFormMainPageInput"
+              placeholder={"nagłówek"}
+              onChange={(e) => {
+                headerSetInputText(e.target.value);
+              }} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => handleCloseHeaderDialog(headerInputText)}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openDescriptionDialog}
+          onClose={handleCloseDescriptionDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description">
+          <DialogTitle>{"Dodaj opis"}</DialogTitle>
+          <DialogContent>
+            <input
+              className="newFormMainPageInput"
+              placeholder="opis"
+              onChange={(e) => {
+                descriptionSetInputText(e.target.value);
+              }} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => handleCloseDescriptionDialog(descriptionInputText)}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openInputDialog}
+          onClose={handleCloseInputDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description">
+          <DialogTitle>{"Dodaj pole tekstowe"}</DialogTitle>
+          <DialogContent>
+            <input
+              className="newFormMainPageInput"
+              placeholder="nazwa"
+              onChange={(e) => {
+                inputNameSetInputText(e.target.value);
+              }} />
+            <input
+              className="newFormMainPageInput"
+              placeholder="opis"
+              onChange={(e) => {
+                inputDescSetInputText(e.target.value);
+              }} />
+            <input
+              className="newFormMainPageInput"
+              placeholder="tekst wypełnienia"
+              onChange={(e) => {
+                inputHintSetInputText(e.target.value);
+              }} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => handleCloseInputDialog(inputNameInputText, inputDescInputText, inputHintInputText)}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openSingleChoiceListDialog}
+          onClose={handleCloseSingleChoiceListDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description">
+          <DialogTitle>{"Dodaj listę jednokrotnego wyboru"}</DialogTitle>
+          <DialogContent>
+            <input
+              className="newFormMainPageInput"
+              placeholder="nazwa"
+              onChange={(e) => {
+                singleChoiceListNameSetInputText(e.target.value);
+              }} />
+            <input
+              className="newFormMainPageInput"
+              placeholder="opis"
+              onChange={(e) => {
+                singleChoiceListDescSetInputText(e.target.value);
+              }} />
+            <div className="newItemInputComponent">
+              <input
+                className="newItemInput"
+                placeholder="element listy"
+                onChange={(e) => {
+                  singleChoiceListNewItemSetInputText(e.target.value);
+                }} />
+              <IconButton
+                style={{ color: colors.grey }}
+                aria-label="Dodaj"
+                onClick={(e) => {
+                  setListItemsData([
+                    ...listItemsData,
+                    singleChoiceListNewItemInputText
+                  ]);
+                }}>
+                <AddIcon />
+              </IconButton>
+            </div>
+            <ListOfItems list={listItemsData} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => handleCloseSingleChoiceListDialog(listItemsData, singleChoiceListNameInputText, singleChoiceListDescInputText)}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openMultipleChoiceListDialog}
+          onClose={handleCloseMultipleChoiceListDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>{"Dodaj listę wielokrotnego wyboru"}</DialogTitle>
+          <DialogContent>
+            <input
+              className="newFormMainPageInput"
+              placeholder="nazwa"
+              onChange={(e) => {
+                multipleChoiceListNameSetInputText(e.target.value);
+              }} />
+            <input
+              className="newFormMainPageInput"
+              placeholder="opis"
+              onChange={(e) => {
+                multipleChoiceListDescSetInputText(e.target.value);
+              }} />
+            <div className="newItemInputComponent">
+              <input
+                className="newItemInput"
+                placeholder="element listy"
+                onChange={(e) => {
+                  multipleChoiceListNewItemSetInputText(e.target.value);
+                }} />
+              <IconButton
+                style={{ color: colors.grey }}
+                aria-label="Dodaj"
+                onClick={(e) => {
+                  setListItemsData([
+                    ...listItemsData,
+                    multipleChoiceListNewItemInputText
+                  ]);
+                }}>
+                <AddIcon />
+              </IconButton>
+            </div>
+            <ListOfItems list={listItemsData} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => handleCloseMultipleChoiceListDialog(listItemsData, multipleChoiceListNameInputText, multipleChoiceListDescInputText)}>Dodaj</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 };
@@ -78,5 +320,23 @@ const NewFormPage = () => {
 //     );
 //   }
 // }
+
+/* <Select
+        isMulti
+        className={"Select"}
+        options={options}
+        onInputChange={(data) => setSelectItems(data)}
+      />
+      <button
+        onClick={() => {
+          setFormData([
+            ...formData,
+            new InputFormDataModel("name", inputText, "hint", "Select"),
+          ]);
+        }}
+      >
+        X D
+      </button>
+      <p>{selectItems}</p> */
 
 export default NewFormPage;

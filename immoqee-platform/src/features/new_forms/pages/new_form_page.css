@@ -1,4 +1,84 @@
 .Select {
   width: fit-content;
-  background-color: aqua;
+}
+
+.newFormMainPageButtonBar {
+  position: fixed;
+  bottom: 15px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.newFormMainPageButton {
+  margin-left: 20;
+}
+
+.newFormMainPageAddButton {
+  background-color: #35e1b8;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 8px;
+  cursor: pointer;
+  outline: none;
+}
+
+.newFormMainPageSaveButton {
+  background-color: #e84646;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+  outline: none;
+}
+
+.newFormMainPageH1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin: 5%;
+}
+
+.newFormMainPageInput {
+  width: 90%;
+  border: 2px solid #35e1b8;
+  padding: 8px 16px;
+  border-radius: 12px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5px;
+}
+.newFormMainPageInput:focus {
+  outline: none;
+}
+
+.newItemInput {
+  width: 100%;
+  border: 2px solid #35e1b8;
+  padding: 8px 16px;
+  border-radius: 12px;
+  height: min-content;
+}
+.newItemInput:focus {
+  outline: none;
+}
+
+.newItemInputComponent{
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./list_of_form_elements.css";
+import "./list_of_items.css";
 
-const ListOfFormElements = (props) => {
+const ListOfItems = (props) => {
   const [data, setData] = useState(props.list);
 
   useEffect(() => {
@@ -9,12 +9,11 @@ const ListOfFormElements = (props) => {
   }, [props]);
 
   return (
-    <div className="listOfElements">
+    <div className="listOfItems">
       {data.map((item, i) => {
         return (
-          <div className="listOfElementsCard">
-            <h3>{item.type}</h3>
-            <p>{item.name}</p>
+          <div className="listOfItemsCard">
+            <p>{item}</p>
           </div>
         );
       })}
@@ -22,4 +21,4 @@ const ListOfFormElements = (props) => {
   );
 };
 
-export default ListOfFormElements;
+export default ListOfItems;

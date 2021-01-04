@@ -1,0 +1,22 @@
+.listOfItems {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .listOfItemsCard {
+    background-color: #35e1b8;
+    padding: 6px 8px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    width: min-content;
+    float: left;
+    color: white;
+  }
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+  }
