@@ -1,0 +1,9 @@
+.home {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.formsTitle {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}

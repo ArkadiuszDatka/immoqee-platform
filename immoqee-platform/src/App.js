@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import All_forms from "./pages/All_forms";
-import NewFormPage from "./features/new_forms/pages/new_form_page";
+import NewFormPage from "./pages/new_form_page";
 
 const App = () => {
   return (
