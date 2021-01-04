@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./list_of_forms.css";
+import Button from '@material-ui/core/Button'; 
 
 const ListOfForms = (props) => {
   const [data, setData] = useState(props.list);
@@ -12,9 +13,11 @@ const ListOfForms = (props) => {
     <div className="listOfForms">
       {data.map((item, i) => {
         return (
-          <div className="listOfFormsCard">
-            <h5>{item.name}</h5>
-          </div>
+          <button className="listOfFormsCard" onClick={() => {
+            alert('asd')
+          }}>
+            {item.name}
+          </button>
         );
       })}
     </div>

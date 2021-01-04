@@ -15,3 +15,6 @@
     float: left;
     color: white;
   }
+  .listOfFormsCard:focus {
+    outline: none;
+  }
