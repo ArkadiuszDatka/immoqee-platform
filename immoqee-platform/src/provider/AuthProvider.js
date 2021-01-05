@@ -7,7 +7,9 @@ const AuthProvider = (props) => {
   const initState = { email: "", password: "" };
   const [inputs, setInputs] = useState(initState);
   const [errors, setErrors] = useState([]);
-  const [token, setToken] = useState(window.localStorage.token);
+  const [token, setToken] = useState(
+    window.localStorage.token === undefined ? null : window.localStorage.token
+  );
 
   const handleSignin = () => {
     authMethods.signin(inputs.email, inputs.password, setErrors, setToken);
