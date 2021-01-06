@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { authMethods } from "../firebase/authmethods";
 
 export const firebaseAuth = React.createContext();
@@ -13,6 +13,7 @@ const AuthProvider = (props) => {
 
   const handleSignin = () => {
     authMethods.signin(inputs.name, inputs.password, setErrors, setToken);
+    setInputs(initState);
     console.log(errors, token);
   };
 

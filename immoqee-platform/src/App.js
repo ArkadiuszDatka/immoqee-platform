@@ -21,7 +21,6 @@ const App = () => {
           <Route path="/all_forms" component={All_forms} />
           <Route path="/create_form" component={NewFormPage} />
           <Route path="/logout" component={Logout} />
-          <Route path="/login" component={Signin} />
         </Switch>
       </Router>
     );
