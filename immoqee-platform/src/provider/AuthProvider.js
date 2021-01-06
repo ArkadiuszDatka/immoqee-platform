@@ -4,7 +4,7 @@ import { authMethods } from "../firebase/authmethods";
 export const firebaseAuth = React.createContext();
 
 const AuthProvider = (props) => {
-  const initState = { email: "", password: "" };
+  const initState = { name: "", password: "" };
   const [inputs, setInputs] = useState(initState);
   const [errors, setErrors] = useState([]);
   const [token, setToken] = useState(
@@ -12,7 +12,7 @@ const AuthProvider = (props) => {
   );
 
   const handleSignin = () => {
-    authMethods.signin(inputs.email, inputs.password, setErrors, setToken);
+    authMethods.signin(inputs.name, inputs.password, setErrors, setToken);
     console.log(errors, token);
   };
 

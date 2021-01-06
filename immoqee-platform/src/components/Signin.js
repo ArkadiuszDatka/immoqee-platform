@@ -16,21 +16,21 @@ const Signin = () => {
 
   return (
     <form onSubmit={handleSubmit} className="signinForm">
-      Signin
+      Zaloguj się
       <input
         onChange={handleChange}
-        name="email"
-        placeholder="email"
+        name="name"
+        placeholder="nazwa"
         value={inputs.email}
       />
       <input
         onChange={handleChange}
         type="password"
         name="password"
-        placeholder="password"
+        placeholder="hasło"
         value={inputs.password}
       />
-      <button>signin</button>
+      <button>Potwierdź</button>
       {errors.length > 0
         ? errors.map((error) => <p style={{ color: "red" }}>{error}</p>)
         : null}

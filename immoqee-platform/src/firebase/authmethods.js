@@ -2,10 +2,13 @@ import firebase from "firebase";
 import firebaseconfig from "./firebaseIndex";
 
 export const authMethods = {
-  signin: (email, password, setErrors, setToken) => {
+  signin: (name, password, setErrors, setToken) => {
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(
+        name + process.env.REACT_APP_HIDDEN_ADDITION,
+        password
+      )
       .then(async (res) => {
         const token = await Object.entries(res.user)[5][1].b;
         await localStorage.setItem("token", token);
