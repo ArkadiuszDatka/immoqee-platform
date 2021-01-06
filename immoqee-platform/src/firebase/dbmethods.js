@@ -13,7 +13,7 @@ export const dbmethods = {
       return data;
     });
   },
-  pushItem: () => {
+  pushItem: (obj) => {
     firebase
       .database()
       .push({
