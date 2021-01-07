@@ -11,7 +11,6 @@ import NewFormPage from "./pages/new_form_page";
 
 const App = () => {
   const { token } = useContext(firebaseAuth);
-  console.log(token);
   const MainStack = () => {
     return (
       <Router>
