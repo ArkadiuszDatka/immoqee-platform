@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormDataModel from "../data_model/form_data_model";
 import ListOfForms from "../components/list_of_forms";
+import { dbmethods } from "../firebase/dbmethods";
 import "./home.css";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
     return (
       <div className="home">
         <h1 className="formsTitle">Formularze</h1>
+        <button onClick={dbmethods.pushItem(forms)}> Dodaj folder </button>
         <ListOfForms list={forms} editState={setEdit} />{" "}
       </div>
     );

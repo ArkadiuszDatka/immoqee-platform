@@ -285,6 +285,7 @@ const NewFormPage = () => {
                 }}
               />
               <IconButton
+                id="btn"
                 style={{ color: colors.grey }}
                 aria-label="Dodaj"
                 onClick={(e) => {

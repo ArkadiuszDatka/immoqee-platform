@@ -75,10 +75,15 @@
   outline: none;
 }
 
-.newItemInputComponent{
+.newItemInputComponent {
   width: 90%;
   margin-left: 5%;
   margin-bottom: 5px;
   display: flex;
   flex-direction: row;
+}
+
+.newItemInputComponent #btn {
+  width: fit-content;
+  background-color: aqua;
 }

@@ -2,20 +2,24 @@ import firebase from "firebase";
 
 export const dbmethods = {
   fetchItems: () => {
-    firebase.database().on("value", (response) => {
-      const data = [];
-      response.forEach((item) => {
-        data.push({
-          info: item.val(),
-          key: item.key,
+    firebase
+      .database()
+      .ref("users")
+      .on("value", (response) => {
+        const data = [];
+        response.forEach((item) => {
+          data.push({
+            info: item.val(),
+            key: item.key,
+          });
         });
+        return data;
       });
-      return data;
-    });
   },
   pushItem: (obj) => {
     firebase
       .database()
+      .ref("users")
       .push({
         /* TODO: Trzeba uzgodnić co wysyłamy dokładnie do bazy */
       })
