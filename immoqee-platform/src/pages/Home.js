@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormDataModel from "../data_model/form_data_model";
 import ListOfForms from "../components/list_of_forms";
+import Select from "react-select";
 import { dbmethods } from "../firebase/dbmethods";
 import "./home.css";
 import HeaderDataModel from "../data_model/header_data_model";
@@ -10,6 +11,15 @@ import SingleChoiceListDataModel from "../data_model/single_choice_list_data_mod
 import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data_model";
 
 const Home = () => {
+  const [select, setSelect] = useState([]);
+  useEffect(() => {
+    console.log(select);
+  }, [select]);
+  const options = [
+    { value: "Język Angielski", label: "Język Angielski" },
+    { value: "Język Niemiecki", label: "Język Niemiecki" },
+    { value: "Język Polski", label: "Język Polski" },
+  ];
   const [edit, setEdit] = useState(false);
   const [formToComplete, setFormToComplete] = useState(new FormDataModel("emptyForm", []),);
   const forms = [
@@ -30,6 +40,17 @@ const Home = () => {
     return (
       <div className="home">
         <h1 className="formsTitle">Formularze</h1>
+
+        <Select
+          className="select"
+          isMulti
+          name="colors"
+          options={options}
+          value={select}
+          onChange={(e) => {
+            setSelect(e);
+          }}
+        ></Select>
         <button onClick={dbmethods.pushItem(forms)}> Dodaj folder </button>
         <ListOfForms list={forms} editState={setEdit} editForm={setFormToComplete} />{" "}
       </div>

@@ -1,6 +1,11 @@
 .home {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.select {
+  width: 90%;
 }
 
 .formsTitle {

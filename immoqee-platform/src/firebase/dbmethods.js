@@ -19,9 +19,9 @@ export const dbmethods = {
   pushItem: (obj) => {
     firebase
       .database()
-      .ref("users")
-      .push({
-        /* TODO: Trzeba uzgodnić co wysyłamy dokładnie do bazy */
+      .ref()
+      .set({
+        name: obj,
       })
       .catch((error) => console.log(error));
   },
