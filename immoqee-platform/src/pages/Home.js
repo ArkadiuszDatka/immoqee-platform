@@ -17,7 +17,14 @@ const Home = () => {
     return (
       <div className="home">
         <h1 className="formsTitle">Formularze</h1>
-        <button onClick={dbmethods.pushItem(forms)}> Dodaj folder </button>
+        <button
+          onClick={() => {
+            dbmethods.pushItem("string");
+          }}
+        >
+          {" "}
+          Dodaj folder{" "}
+        </button>
         <ListOfForms list={forms} editState={setEdit} />{" "}
       </div>
     );
