@@ -1,9 +1,14 @@
 .home {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.select {
+  width: 90%;
 }
 
 .formsTitle {
-    margin-top: 10%;
-    margin-bottom: 10%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }

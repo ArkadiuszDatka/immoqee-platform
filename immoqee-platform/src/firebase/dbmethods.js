@@ -17,13 +17,11 @@ export const dbmethods = {
       });
   },
   pushItem: (obj) => {
-    let uid = firebase.auth().currentUser.uid;
-    console.log(firebase.database());
     firebase
       .database()
-      .ref("users/" + uid)
+      .ref()
       .set({
-        nazwa: obj,
+        name: obj,
       })
       .catch((error) => console.log(error));
   },
