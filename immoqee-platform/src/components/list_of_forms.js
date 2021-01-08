@@ -16,7 +16,7 @@ const ListOfForms = (props) => {
           <button
             className="listOfFormsCard"
             onClick={() => {
-              alert("asd");
+              props.editForm(data[i]);
               props.editState(true);
             }}
           >

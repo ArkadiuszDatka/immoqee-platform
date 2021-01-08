@@ -72,49 +72,59 @@ const NewFormPage = () => {
   const handleClickOpenHeaderDialog = () => {
     setOpenHeaderDialog(true);
   };
-  const handleCloseHeaderDialog = (name) => {
+  const handleCloseHeaderDialog = (name, save) => {
+    if(save == "true"){
+      setFormData([...formData, new HeaderDataModel("", name)]);
+    }
     setOpenHeaderDialog(false);
-    setFormData([...formData, new HeaderDataModel("", name)]);
   };
 
   const handleClickOpenDescriptionDialog = () => {
     setOpenDescriptionDialog(true);
   };
-  const handleCloseDescriptionDialog = (name) => {
+  const handleCloseDescriptionDialog = (name, save) => {
+    if(save == "true"){
+      setFormData([...formData, new DescriptionDataModel("", name)]);
+    }
     setOpenDescriptionDialog(false);
-    setFormData([...formData, new DescriptionDataModel("", name)]);
   };
 
   const handleClickOpenInputDialog = () => {
     setOpenInputDialog(true);
   };
-  const handleCloseInputDialog = (name, desc, hint) => {
+  const handleCloseInputDialog = (name, desc, hint, save) => {
+    if(save == "true"){
+      setFormData([...formData, new InputDataModel("", name, desc, hint)]);
+    }
     setOpenInputDialog(false);
-    setFormData([...formData, new InputDataModel("", name, desc, hint)]);
   };
 
   const handleClickOpenSingleChoiceListDialog = () => {
     setOpenSingleChoiceListDialog(true);
   };
-  const handleCloseSingleChoiceListDialog = (list, name, desc) => {
+  const handleCloseSingleChoiceListDialog = (list, name, desc, save) => {
+    if(save == "true"){
+      setFormData([
+        ...formData,
+        new SingleChoiceListDataModel("", list, name, desc),
+      ]);
+      setListItemsData([]);
+    }
     setOpenSingleChoiceListDialog(false);
-    setFormData([
-      ...formData,
-      new SingleChoiceListDataModel("", list, name, desc),
-    ]);
-    setListItemsData([]);
   };
 
   const handleClickOpenMultipleChoiceListDialog = () => {
     setOpenMultipleChoiceListDialog(true);
   };
-  const handleCloseMultipleChoiceListDialog = (list, name, desc) => {
+  const handleCloseMultipleChoiceListDialog = (list, name, desc, save) => {
+    if(save == "true"){
+      setFormData([
+        ...formData,
+        new MultipleChoiceListDataModel("", list, name, desc),
+      ]);
+      setListItemsData([]);
+    }
     setOpenMultipleChoiceListDialog(false);
-    setFormData([
-      ...formData,
-      new MultipleChoiceListDataModel("", list, name, desc),
-    ]);
-    setListItemsData([]);
   };
 
   return (
@@ -181,7 +191,7 @@ const NewFormPage = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => handleCloseHeaderDialog(headerInputText)}>
+            <Button onClick={() => handleCloseHeaderDialog(headerInputText, "true")}>
               Dodaj
             </Button>
           </DialogActions>
@@ -204,7 +214,7 @@ const NewFormPage = () => {
           </DialogContent>
           <DialogActions>
             <Button
-              onClick={() => handleCloseDescriptionDialog(descriptionInputText)}
+              onClick={() => handleCloseDescriptionDialog(descriptionInputText, "true")}
             >
               Dodaj
             </Button>
@@ -246,7 +256,8 @@ const NewFormPage = () => {
                 handleCloseInputDialog(
                   inputNameInputText,
                   inputDescInputText,
-                  inputHintInputText
+                  inputHintInputText,
+                  "true"
                 )
               }
             >
@@ -306,7 +317,8 @@ const NewFormPage = () => {
                 handleCloseSingleChoiceListDialog(
                   listItemsData,
                   singleChoiceListNameInputText,
-                  singleChoiceListDescInputText
+                  singleChoiceListDescInputText,
+                  "true"
                 )
               }
             >
@@ -345,6 +357,7 @@ const NewFormPage = () => {
                 }}
               />
               <IconButton
+                id="btn"
                 style={{ color: colors.grey }}
                 aria-label="Dodaj"
                 onClick={(e) => {
@@ -365,7 +378,8 @@ const NewFormPage = () => {
                 handleCloseMultipleChoiceListDialog(
                   listItemsData,
                   multipleChoiceListNameInputText,
-                  multipleChoiceListDescInputText
+                  multipleChoiceListDescInputText,
+                  "true"
                 )
               }
             >
