@@ -20,3 +20,7 @@ p {
   text-overflow: ellipsis;
   max-width: 200px;
 }
+
+.listOfElementsCard #btn {
+  width: fit-content;
+}

@@ -18,3 +18,13 @@
   .listOfFormsCard:focus {
     outline: none;
   }
+  
+  .rowElements{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .rowElements #btn{
+    width: fit-content;
+  }
