@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./list_of_forms.css";
 import Button from "@material-ui/core/Button";
+import { dbmethods } from "../firebase/dbmethods";
 import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from '@material-ui/icons/Delete';
-import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
 import { colors } from "@material-ui/core";
 
 const ListOfForms = (props) => {
@@ -18,7 +19,7 @@ const ListOfForms = (props) => {
       {data.map((item, i) => {
         return (
           <div className="listOfFormsCard">
-            <div class="rowElements">
+            <div className="rowElements">
               <h6>{item.name}</h6>
               <IconButton
                 id="btn"
@@ -29,16 +30,22 @@ const ListOfForms = (props) => {
                   props.editForm(data[i]);
                   props.editState(true);
                 }}
-              ><AddIcon /></IconButton>
+              >
+                <AddIcon />
+              </IconButton>
               <IconButton
                 id="btn"
                 className="btton"
                 style={{ color: colors.grey }}
                 aria-label="Cofnij"
                 onClick={(e) => {
-                  setData(data.splice(i, 1));
+                  // dbmethods.deleteItem(e.value.key);
+                  console.log(data[i]);
+                  dbmethods.pushItem(data[i]);
                 }}
-              ><DeleteIcon /></IconButton>
+              >
+                <DeleteIcon />
+              </IconButton>
             </div>
           </div>
         );

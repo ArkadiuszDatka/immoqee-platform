@@ -7,6 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Select from "react-select";
+import { dbmethods } from "../firebase/dbmethods";
 import "./new_form_page.css";
 import ListOfFormElements from "../components/list_of_form_elements";
 import HeaderDataModel from "../data_model/header_data_model";
@@ -16,6 +17,7 @@ import SingleChoiceListDataModel from "../data_model/single_choice_list_data_mod
 import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data_model";
 import ListOfItems from "../components/list_of_items";
 import AddIcon from "@material-ui/icons/Add";
+import FormDataModel from "../data_model/form_data_model";
 import { makeStyles } from "@material-ui/core/styles";
 import { colors } from "@material-ui/core";
 
@@ -73,7 +75,7 @@ const NewFormPage = () => {
     setOpenHeaderDialog(true);
   };
   const handleCloseHeaderDialog = (name, save) => {
-    if(save == "true"){
+    if (save === "true") {
       setFormData([...formData, new HeaderDataModel("", name)]);
     }
     setOpenHeaderDialog(false);
@@ -83,7 +85,7 @@ const NewFormPage = () => {
     setOpenDescriptionDialog(true);
   };
   const handleCloseDescriptionDialog = (name, save) => {
-    if(save == "true"){
+    if (save === "true") {
       setFormData([...formData, new DescriptionDataModel("", name)]);
     }
     setOpenDescriptionDialog(false);
@@ -93,7 +95,7 @@ const NewFormPage = () => {
     setOpenInputDialog(true);
   };
   const handleCloseInputDialog = (name, desc, hint, save) => {
-    if(save == "true"){
+    if (save === "true") {
       setFormData([...formData, new InputDataModel("", name, desc, hint)]);
     }
     setOpenInputDialog(false);
@@ -103,7 +105,7 @@ const NewFormPage = () => {
     setOpenSingleChoiceListDialog(true);
   };
   const handleCloseSingleChoiceListDialog = (list, name, desc, save) => {
-    if(save == "true"){
+    if (save === "true") {
       setFormData([
         ...formData,
         new SingleChoiceListDataModel("", list, name, desc),
@@ -117,7 +119,7 @@ const NewFormPage = () => {
     setOpenMultipleChoiceListDialog(true);
   };
   const handleCloseMultipleChoiceListDialog = (list, name, desc, save) => {
-    if(save == "true"){
+    if (save === "true") {
       setFormData([
         ...formData,
         new MultipleChoiceListDataModel("", list, name, desc),
@@ -170,7 +172,12 @@ const NewFormPage = () => {
         >
           Dodaj listę wielokrotnego wyboru
         </button>
-        <button className="newFormMainPageSaveButton" onClick={() => {}}>
+        <button
+          className="newFormMainPageSaveButton"
+          onClick={() => {
+            dbmethods.pushItem(new FormDataModel(inputText, formData));
+          }}
+        >
           Zapisz
         </button>
 
@@ -191,7 +198,9 @@ const NewFormPage = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => handleCloseHeaderDialog(headerInputText, "true")}>
+            <Button
+              onClick={() => handleCloseHeaderDialog(headerInputText, "true")}
+            >
               Dodaj
             </Button>
           </DialogActions>
@@ -214,7 +223,9 @@ const NewFormPage = () => {
           </DialogContent>
           <DialogActions>
             <Button
-              onClick={() => handleCloseDescriptionDialog(descriptionInputText, "true")}
+              onClick={() =>
+                handleCloseDescriptionDialog(descriptionInputText, "true")
+              }
             >
               Dodaj
             </Button>
