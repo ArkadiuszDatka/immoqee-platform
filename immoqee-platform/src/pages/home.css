@@ -5,7 +5,9 @@
 }
 
 .select {
-  width: 90%;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .formsTitle {
@@ -17,10 +19,31 @@
   margin: 5%;
 }
 
+.editStack h6 {
+  margin-bottom: 20px;
+}
+
 .editStack h1{
   margin-bottom: 10%;
 }
 
 .elementStyle{
   margin: 3%;
+}
+
+.elementStyle input{
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #cccccc;
+  padding: 18px 16px;
+  border-radius: 4px;
+}
+
+.divider{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 2px;
+  background-color: black;
 }

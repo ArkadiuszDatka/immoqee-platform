@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, setState } from "react";
 import FormDataModel from "../data_model/form_data_model";
 import ListOfForms from "../components/list_of_forms";
 import Select from "react-select";
@@ -11,15 +11,6 @@ import SingleChoiceListDataModel from "../data_model/single_choice_list_data_mod
 import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data_model";
 
 const Home = () => {
-  const [select, setSelect] = useState([]);
-  useEffect(() => {
-    console.log(select);
-  }, [select]);
-  const options = [
-    { value: "Język Angielski", label: "Język Angielski" },
-    { value: "Język Niemiecki", label: "Język Niemiecki" },
-    { value: "Język Polski", label: "Język Polski" },
-  ];
   const [edit, setEdit] = useState(false);
   const [formToComplete, setFormToComplete] = useState(new FormDataModel("emptyForm", []),);
   const forms = [
@@ -27,8 +18,8 @@ const Home = () => {
       new HeaderDataModel("", "HeaderTitle"),
       new DescriptionDataModel("", "DescriptionTitle"),
       new InputDataModel("", "InputTitle", "InputDescription", "hint"),
-      new SingleChoiceListDataModel("", [], "SingleChoiceListTitle", "SingleChoiceListDescription"),
-      new MultipleChoiceListDataModel("", [], "MultipleChoiceListTitle", "MultipleChoiceListDescription"),
+      new SingleChoiceListDataModel("", ["a", "b", "c"], "SingleChoiceListTitle", "SingleChoiceListDescription"),
+      new MultipleChoiceListDataModel("", ["a", "b", "d"], "MultipleChoiceListTitle", "MultipleChoiceListDescription"),
     ]),
     new FormDataModel("name2", []),
     new FormDataModel("name3", []),
@@ -36,21 +27,48 @@ const Home = () => {
     new FormDataModel("name5", []),
   ];
 
+  const SelectStack = (props) => {
+    const [select, setSelect] = useState([]);
+    const options = [];
+    props.list.forEach(arr => {
+      options.push({ value: arr, label: arr });
+    });
+    useEffect(() => {
+      console.log(select);
+      forms[props.index].value = select;
+    }, [select]);
+
+    return (
+      props.isMulti
+        ? <div>
+          <Select
+            className="select"
+            isMulti
+            name="colors"
+            options={options}
+            value={select}
+            onChange={(e) => {
+              setSelect(e);
+            }}
+          ></Select>
+        </div>
+        : <div>
+          <Select
+            className="select"
+            name="colors"
+            options={options}
+            value={select}
+            onChange={(e) => {
+              setSelect(e);
+            }}
+          ></Select>
+        </div>
+    );
+  }
   const HomeStack = () => {
     return (
       <div className="home">
         <h1 className="formsTitle">Formularze</h1>
-
-        <Select
-          className="select"
-          isMulti
-          name="colors"
-          options={options}
-          value={select}
-          onChange={(e) => {
-            setSelect(e);
-          }}
-        ></Select>
         <button onClick={dbmethods.pushItem(forms)}> Dodaj folder </button>
         <ListOfForms list={forms} editState={setEdit} editForm={setFormToComplete} />{" "}
       </div>
@@ -68,7 +86,11 @@ const Home = () => {
                   <h2>{item.name}</h2>
                   <input
                     placeholder={item.hint}
+                    onChange={(e) => {
+                      item.value = e.target.value;
+                    }}
                   />
+                  <div className="divider" />
                 </div>
               );
               break;
@@ -78,34 +100,46 @@ const Home = () => {
                   <h2>{item.name}</h2>
                   <input
                     placeholder={item.hint}
+                    onChange={(e) => {
+                      item.value = e.target.value;
+                    }}
                   />
+                  <div className="divider" />
                 </div>
               );
               break;
             case "Input":
               return (
                 <div className="elementStyle">
-                <h2>{item.name}</h2>
-                <p>{item.desc}</p>
-                <input
-                  placeholder={item.hint}
-                />
+                  <h2>{item.name}</h2>
+                  <h6>{item.desc}</h6>
+                  <input
+                    placeholder={item.hint}
+                    onChange={(e) => {
+                      item.value = e.target.value;
+                    }}
+                  />
+                  <div className="divider" />
                 </div>
               );
               break;
             case "SingleChoiceList":
               return (
                 <div className="elementStyle">
-                <h2>{item.name}</h2>
-                <p>{item.desc}</p>
+                  <h2>{item.name}</h2>
+                  <h6>{item.desc}</h6>
+                  <SelectStack list={item.list} isMulti={false} index={i}/>
+                  <div className="divider" />
                 </div>
               );
               break;
             case "MultipleChoiceList":
               return (
                 <div className="elementStyle">
-                <h2>{item.name}</h2>
-                <p>{item.desc}</p>
+                  <h2>{item.name}</h2>
+                  <h6>{item.desc}</h6>
+                  <SelectStack list={item.list} isMulti={true} index={i}/>
+                  <div className="divider" />
                 </div>
               );
               break;
@@ -117,13 +151,12 @@ const Home = () => {
               );
               break;
           }
-          return (
-            <div>
-              <p>{item.name}</p>
-            </div>
-          );
         })}
-        <button onClick={() => setEdit(false)}></button>
+        <button onClick={() => {
+          setEdit(false);
+          }}>
+          Pobierz plik DOCX
+        </button>
       </div>
     );
   };
