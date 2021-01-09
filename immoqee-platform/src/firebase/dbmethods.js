@@ -4,12 +4,12 @@ export const dbmethods = {
   fetchItems: () => {
     firebase
       .database()
-      .ref("users")
+      .ref()
       .on("value", (response) => {
         const data = [];
         response.forEach((item) => {
           data.push({
-            info: item.val(),
+            data: item.val(),
             key: item.key,
           });
         });
@@ -17,11 +17,12 @@ export const dbmethods = {
       });
   },
   pushItem: (obj) => {
+    // Załatwione
     firebase
       .database()
       .ref()
-      .set({
-        name: obj,
+      .push({
+        obj,
       })
       .catch((error) => console.log(error));
   },
