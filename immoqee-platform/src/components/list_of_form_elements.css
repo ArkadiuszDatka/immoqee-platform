@@ -5,8 +5,6 @@
   margin-right: 5%;
 }
 .listOfElementsCard {
-  display: flex;
-  flex-direction: column-reverse;
   background-color: #35e1b8;
   padding: 20px 20px;
   margin: 5px;
