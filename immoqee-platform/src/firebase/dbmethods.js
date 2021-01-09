@@ -9,7 +9,7 @@ export const dbmethods = {
         const data = [];
         response.forEach((item) => {
           data.push({
-            info: item.val(),
+            data: item.val(),
             key: item.key,
           });
         });
@@ -17,6 +17,7 @@ export const dbmethods = {
       });
   },
   pushItem: (obj) => {
+    // Załatwione
     firebase
       .database()
       .ref()
