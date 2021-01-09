@@ -28,3 +28,8 @@
   .rowElements #btn{
     width: fit-content;
   }
+
+  .rowElements #btn:hover {
+    background-color: #35e1b8;
+    color: white;
+  }

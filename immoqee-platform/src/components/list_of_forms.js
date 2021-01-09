@@ -22,6 +22,7 @@ const ListOfForms = (props) => {
               <h6>{item.name}</h6>
               <IconButton
                 id="btn"
+                className="btton"
                 style={{ color: colors.grey }}
                 aria-label="Uzupełnij"
                 onClick={(e) => {
@@ -31,6 +32,7 @@ const ListOfForms = (props) => {
               ><AddIcon /></IconButton>
               <IconButton
                 id="btn"
+                className="btton"
                 style={{ color: colors.grey }}
                 aria-label="Cofnij"
                 onClick={(e) => {

@@ -24,3 +24,8 @@ p {
 .listOfElementsCard #btn {
   width: fit-content;
 }
+
+.listOfElementsCard #btn:hover {
+  background-color: #35e1b8;
+  color: white;
+}
