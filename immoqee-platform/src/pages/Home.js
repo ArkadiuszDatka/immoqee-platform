@@ -13,6 +13,8 @@ import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { colors } from "@material-ui/core";
+import * as fs from "fs";
+import { Document, Packer, Paragraph, TextRun } from "docx";
 
 const Home = () => {
   const [edit, setEdit] = useState(false);
@@ -85,19 +87,19 @@ const Home = () => {
         ></Select>
       </div>
     ) : (
-      <div>
-        <Select
-          className="select"
-          name="colors"
-          options={options}
-          value={select}
-          onChange={(e) => {
-            setSelect(e);
-            formToComplete.elements[props.index].value = e;
-          }}
-        ></Select>
-      </div>
-    );
+        <div>
+          <Select
+            className="select"
+            name="colors"
+            options={options}
+            value={select}
+            onChange={(e) => {
+              setSelect(e);
+              formToComplete.elements[props.index].value = e;
+            }}
+          ></Select>
+        </div>
+      );
   };
   const HomeStack = () => {
     return (
@@ -202,11 +204,31 @@ const Home = () => {
         })}
         <button
           onClick={() => {
-            alert(formToComplete.elements[0].value);
-            alert(formToComplete.elements[1].value);
-            alert(formToComplete.elements[2].value);
-            alert(formToComplete.elements[3].value);
-            alert(formToComplete.elements[4].value);
+            const doc = new Document();
+            doc.addSection({
+              properties: {},
+              children: [
+                new Paragraph({
+                  children: [
+                    new TextRun("Hello World"),
+                    new TextRun({
+                      text: "Foo Bar",
+                      bold: true,
+                    }),
+                    new TextRun({
+                      text: "\tGithub is the best",
+                      bold: true,
+                    }),
+                  ],
+                }),
+              ],
+            });
+
+            Packer.toBuffer(doc).then((buffer) => {
+              //TODO: nie działą writeFileSync 
+              // fs.writeFileSync("My Document.docx", buffer);
+            });
+
             setEdit(false);
           }}
         >
