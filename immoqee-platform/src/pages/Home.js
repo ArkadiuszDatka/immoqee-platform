@@ -14,7 +14,7 @@ import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { colors } from "@material-ui/core";
-import { Document, Packer, Paragraph, TextRun } from "docx";
+import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, ITableCellMarginOptions } from "docx";
 
 const Home = () => {
   const [edit, setEdit] = useState(false);
@@ -87,19 +87,19 @@ const Home = () => {
         ></Select>
       </div>
     ) : (
-      <div>
-        <Select
-          className="select"
-          name="colors"
-          options={options}
-          value={select}
-          onChange={(e) => {
-            setSelect(e);
-            formToComplete.elements[props.index].value = e;
-          }}
-        ></Select>
-      </div>
-    );
+        <div>
+          <Select
+            className="select"
+            name="colors"
+            options={options}
+            value={select}
+            onChange={(e) => {
+              setSelect(e);
+              formToComplete.elements[props.index].value = e;
+            }}
+          ></Select>
+        </div>
+      );
   };
   const HomeStack = () => {
     return (
@@ -205,31 +205,190 @@ const Home = () => {
         <button
           onClick={() => {
             const doc = new Document();
-            doc.addSection({
-              properties: {},
-              children: [
-                new Paragraph({
-                  children: [
-                    new TextRun("Hello World"),
-                    new TextRun({
-                      text: "Foo Bar",
-                      bold: true,
-                    }),
-                    new TextRun({
-                      text: "\tGithub is the best",
-                      bold: true,
-                    }),
-                  ],
-                }),
-              ],
+            const rows = [];
+            formToComplete.elements.forEach((element) => {
+              switch (element.type) {
+                case "Header":
+                  rows.push(
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          children: [
+                            new Paragraph(element.value)],
+                          width: {
+                            size: 100,
+                            type: WidthType.PCT,
+                          },
+                          margins: {
+                            top: 100,
+                            bottom: 100,
+                            left: 100,
+                            right: 100,
+                          },
+                        }),
+                      ],
+                    })
+                  );
+                  break;
+                case "Description":
+                  rows.push(
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          children: [
+                            new Paragraph(element.value)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                        }),
+                      ],
+                    })
+                  );
+                  break;
+                case "Input":
+                  rows.push(
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          children: [
+                            new Paragraph(element.name)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                        }),
+                        new TableCell({
+                          children: [
+                            new Paragraph(element.value)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                        }),
+                      ],
+                    })
+                  );
+                  break;
+                case "SingleChoiceList":
+                  rows.push(
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          children: [
+                            new Paragraph(element.name)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                        }),
+                        new TableCell({
+                          children: [
+                            new Paragraph(element.value.value)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                        }),
+                      ],
+                    })
+                  );
+                  break;
+                case "MultipleChoiceList":
+                  let value = "";
+                  element.value.forEach((item)=>{
+                    value += `${item.value}, `
+                  });
+                  rows.push(
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          children: [
+                            new Paragraph(element.name)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                        }),
+                        new TableCell({
+                          children: [
+                            new Paragraph(value)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                        }),
+                      ],
+                    })
+                  );
+                  break;
+                default:
+                  break;
+              }
             });
 
-            Packer.toBlob(doc).then((blob) => {
-              console.log(blob);
-              saveAs(blob, "example.docx");
-              console.log("Document created successfully");
-            });
+            if (rows.length !== 0) {
+              const table = new Table({
+                rows: rows,
+                width: {
+                  size: 9000,
+                  type: WidthType.DXA,
+                },
+              });
 
+              doc.addSection({
+                properties: {},
+                children: [table],
+              });
+
+              Packer.toBlob(doc).then((blob) => {
+                saveAs(blob, formToComplete.name + ".docx");
+              });
+            } else {
+              alert("błąd długości dokumentu");
+            }
             setEdit(false);
           }}
         >
