@@ -18,16 +18,16 @@ const ListOfForms = (props) => {
     <div className="listOfForms">
       {data.map((item, i) => {
         return (
-          <div className="listOfFormsCard">
+          <div key={i} className="listOfFormsCard">
             <div className="rowElements">
-              <h6>{item.name}</h6>
+              <h6>{item.data.name}</h6>
               <IconButton
                 id="btn"
                 className="btton"
                 style={{ color: colors.grey }}
                 aria-label="Uzupełnij"
                 onClick={(e) => {
-                  props.editForm(data[i]);
+                  props.editForm(data[i].data);
                   props.editState(true);
                 }}
               >
@@ -37,11 +37,9 @@ const ListOfForms = (props) => {
                 id="btn"
                 className="btton"
                 style={{ color: colors.grey }}
-                aria-label="Cofnij"
+                aria-label="Usuń"
                 onClick={(e) => {
-                  // dbmethods.deleteItem(e.value.key);
-                  console.log(data[i]);
-                  dbmethods.pushItem(data[i]);
+                  dbmethods.deleteItem(data[i].key);
                 }}
               >
                 <DeleteIcon />

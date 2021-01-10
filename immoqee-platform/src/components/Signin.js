@@ -36,6 +36,9 @@ const Signin = () => {
           <div className="btnContainer">
             <button onClick={handleSubmit}>Potwierdź</button>
           </div>
+          {errors.length > 0 ? (
+            <p style={{ color: "red" }}>{errors[errors.length - 1]}</p>
+          ) : null}
         </div>
       </section>
     </div>
@@ -56,7 +59,7 @@ const Signin = () => {
     //   />
     //   <button>Potwierdź</button>
     //   {errors.length > 0
-    //     ? errors.map((error) => <p style={{ color: "red" }}>{error}</p>)
+    //     ? errors.map((error,key) => <p style={{ color: "red" }}>{error}</p>)
     //     : null}
     // </form>
   );

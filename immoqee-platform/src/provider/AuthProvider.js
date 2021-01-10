@@ -12,8 +12,13 @@ const AuthProvider = (props) => {
   );
 
   const handleSignin = () => {
-    authMethods.signin(inputs.name, inputs.password, setErrors, setToken);
-    setInputs(initState);
+    authMethods.signin(
+      inputs.name,
+      inputs.password,
+      setErrors,
+      setToken,
+      setInputs
+    );
     console.log(errors, token);
   };
 
