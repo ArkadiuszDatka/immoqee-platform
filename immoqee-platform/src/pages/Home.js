@@ -190,199 +190,208 @@ const Home = () => {
         })}
         <button
           onClick={() => {
-            const doc = new Document();
-            const rows = [];
+            let correct = true;
             formToComplete.elements.forEach((element) => {
-              switch (element.type) {
-                case "Header":
-                  rows.push(
-                    new TableRow({
-                      children: [
-                        new TableCell({
-                          children: [
-                            new Paragraph({
-                              text: element.value,
-                              heading: HeadingLevel.TITLE,
-                            })],
-                          width: {
-                            size: 100,
-                            type: WidthType.PCT,
-                          },
-                          margins: {
-                            top: 100,
-                            bottom: 100,
-                            left: 100,
-                            right: 100,
-                          },
-                        }),
-                      ],
-                    })
-                  );
-                  break;
-                case "Description":
-                  rows.push(
-                    new TableRow({
-                      children: [
-                        new TableCell({
-                          children: [
-                            new Paragraph({
-                              text: element.value,
-                              heading: HeadingLevel.HEADING_6,
-                            })
-                          ],
-                          width: {
-                            size: 100,
-                            type: WidthType.PCT,
-                          },
-                          margins: {
-                            top: 100,
-                            bottom: 100,
-                            left: 100,
-                            right: 100,
-                          },
-                        }),
-                      ],
-                    })
-                  );
-                  break;
-                case "Input":
-                  rows.push(
-                    new TableRow({
-                      children: [
-                        new TableCell({
-                          children: [
-                            new Paragraph(element.name)],
-                          width: {
-                            size: 100,
-                            type: WidthType.PCT,
-                          },
-                          margins: {
-                            top: 100,
-                            bottom: 100,
-                            left: 100,
-                            right: 100,
-                          },
-                        }),
-                        new TableCell({
-                          children: [
-                            new Paragraph(element.value)],
-                          width: {
-                            size: 100,
-                            type: WidthType.PCT,
-                          },
-                          margins: {
-                            top: 100,
-                            bottom: 100,
-                            left: 100,
-                            right: 100,
-                          },
-                        }),
-                      ],
-                    })
-                  );
-                  break;
-                case "SingleChoiceList":
-                  rows.push(
-                    new TableRow({
-                      children: [
-                        new TableCell({
-                          children: [
-                            new Paragraph(element.name)],
-                          width: {
-                            size: 100,
-                            type: WidthType.PCT,
-                          },
-                          margins: {
-                            top: 100,
-                            bottom: 100,
-                            left: 100,
-                            right: 100,
-                          },
-                        }),
-                        new TableCell({
-                          children: [
-                            new Paragraph(element.value.value)],
-                          width: {
-                            size: 100,
-                            type: WidthType.PCT,
-                          },
-                          margins: {
-                            top: 100,
-                            bottom: 100,
-                            left: 100,
-                            right: 100,
-                          },
-                        }),
-                      ],
-                    })
-                  );
-                  break;
-                case "MultipleChoiceList":
-                  let value = "";
-                  element.value.forEach((item) => {
-                    value += `${item.value}, `
-                  });
-                  rows.push(
-                    new TableRow({
-                      children: [
-                        new TableCell({
-                          children: [
-                            new Paragraph(element.name)],
-                          width: {
-                            size: 100,
-                            type: WidthType.PCT,
-                          },
-                          margins: {
-                            top: 100,
-                            bottom: 100,
-                            left: 100,
-                            right: 100,
-                          },
-                        }),
-                        new TableCell({
-                          children: [
-                            new Paragraph(value)],
-                          width: {
-                            size: 100,
-                            type: WidthType.PCT,
-                          },
-                          margins: {
-                            top: 100,
-                            bottom: 100,
-                            left: 100,
-                            right: 100,
-                          },
-                        }),
-                      ],
-                    })
-                  );
-                  break;
-                default:
-                  break;
+              if (element.value.length === 0) {
+                correct = false;
               }
             });
-
-            if (rows.length !== 0) {
-              const table = new Table({
-                rows: rows,
-                width: {
-                  size: 9000,
-                  type: WidthType.DXA,
-                },
+            if (correct) {
+              const doc = new Document();
+              const rows = [];
+              formToComplete.elements.forEach((element) => {
+                switch (element.type) {
+                  case "Header":
+                    rows.push(
+                      new TableRow({
+                        children: [
+                          new TableCell({
+                            children: [
+                              new Paragraph({
+                                text: element.value,
+                                heading: HeadingLevel.TITLE,
+                              })],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                          }),
+                        ],
+                      })
+                    );
+                    break;
+                  case "Description":
+                    rows.push(
+                      new TableRow({
+                        children: [
+                          new TableCell({
+                            children: [
+                              new Paragraph({
+                                text: element.value,
+                                heading: HeadingLevel.HEADING_6,
+                              })
+                            ],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                          }),
+                        ],
+                      })
+                    );
+                    break;
+                  case "Input":
+                    rows.push(
+                      new TableRow({
+                        children: [
+                          new TableCell({
+                            children: [
+                              new Paragraph(element.name)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                          }),
+                          new TableCell({
+                            children: [
+                              new Paragraph(element.value)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                          }),
+                        ],
+                      })
+                    );
+                    break;
+                  case "SingleChoiceList":
+                    rows.push(
+                      new TableRow({
+                        children: [
+                          new TableCell({
+                            children: [
+                              new Paragraph(element.name)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                          }),
+                          new TableCell({
+                            children: [
+                              new Paragraph(element.value.value)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                          }),
+                        ],
+                      })
+                    );
+                    break;
+                  case "MultipleChoiceList":
+                    let value = "";
+                    element.value.forEach((item) => {
+                      value += `${item.value}, `
+                    });
+                    rows.push(
+                      new TableRow({
+                        children: [
+                          new TableCell({
+                            children: [
+                              new Paragraph(element.name)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                          }),
+                          new TableCell({
+                            children: [
+                              new Paragraph(value)],
+                            width: {
+                              size: 100,
+                              type: WidthType.PCT,
+                            },
+                            margins: {
+                              top: 100,
+                              bottom: 100,
+                              left: 100,
+                              right: 100,
+                            },
+                          }),
+                        ],
+                      })
+                    );
+                    break;
+                  default:
+                    break;
+                }
               });
+              if (rows.length !== 0) {
+                const table = new Table({
+                  rows: rows,
+                  width: {
+                    size: 9000,
+                    type: WidthType.DXA,
+                  },
+                });
 
-              doc.addSection({
-                properties: {},
-                children: [table],
-              });
+                doc.addSection({
+                  properties: {},
+                  children: [table],
+                });
 
-              Packer.toBlob(doc).then((blob) => {
-                saveAs(blob, formToComplete.name + ".docx");
-              });
+                Packer.toBlob(doc).then((blob) => {
+                  saveAs(blob, formToComplete.name + ".docx");
+                });
+              } else {
+                alert("błąd długości formularza");
+              }
+              setEdit(false);
             } else {
-              alert("błąd długości dokumentu");
+              alert("Pola formularza nie moga być puste.");
             }
-            setEdit(false);
           }}
         >
           Pobierz plik DOCX

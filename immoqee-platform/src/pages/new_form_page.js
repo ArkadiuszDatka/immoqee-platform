@@ -78,8 +78,10 @@ const NewFormPage = () => {
     setOpenHeaderDialog(true);
   };
   const handleCloseHeaderDialog = (name, save) => {
-    if (save === "true") {
+    if (save === "true" && name.length !==0) {
       setFormData([...formData, new HeaderDataModel("", name)]);
+    } else if (save === "true"){
+      alert("Nazwa nie może być pusta");
     }
     setOpenHeaderDialog(false);
   };
@@ -88,8 +90,10 @@ const NewFormPage = () => {
     setOpenDescriptionDialog(true);
   };
   const handleCloseDescriptionDialog = (name, save) => {
-    if (save === "true") {
+    if (save === "true" && name.length !==0) {
       setFormData([...formData, new DescriptionDataModel("", name)]);
+    } else if (save === "true"){
+      alert("Nazwa nie może być pusta");
     }
     setOpenDescriptionDialog(false);
   };
@@ -98,8 +102,13 @@ const NewFormPage = () => {
     setOpenInputDialog(true);
   };
   const handleCloseInputDialog = (name, desc, hint, save) => {
-    if (save === "true") {
+    if (save === "true" && 
+    name.length !==0 &&
+    desc.length !==0 &&
+    hint.length !==0) {
       setFormData([...formData, new InputDataModel("", name, desc, hint)]);
+    } else if (save === "true"){
+      alert("Nazwa, opis i tekst wypełnienia nie mogą być puste.");
     }
     setOpenInputDialog(false);
   };
@@ -108,12 +117,17 @@ const NewFormPage = () => {
     setOpenSingleChoiceListDialog(true);
   };
   const handleCloseSingleChoiceListDialog = (list, name, desc, save) => {
-    if (save === "true") {
+    if (save === "true" &&
+    name.length !==0 &&
+    desc.length !==0 &&
+    list.length !==0) {
       setFormData([
         ...formData,
         new SingleChoiceListDataModel("", list, name, desc),
       ]);
       setListItemsData([]);
+    } else if (save === "true"){
+      alert("Nazwa, opis i lista nie mogą być puste");
     }
     setOpenSingleChoiceListDialog(false);
   };
@@ -122,12 +136,17 @@ const NewFormPage = () => {
     setOpenMultipleChoiceListDialog(true);
   };
   const handleCloseMultipleChoiceListDialog = (list, name, desc, save) => {
-    if (save === "true") {
+    if (save === "true" &&
+    name.length !==0 &&
+    desc.length !==0 &&
+    list.length !==0) {
       setFormData([
         ...formData,
         new MultipleChoiceListDataModel("", list, name, desc),
       ]);
       setListItemsData([]);
+    } else if (save === "true"){
+      alert("Nazwa, opis i lista nie mogą być puste");
     }
     setOpenMultipleChoiceListDialog(false);
   };
@@ -178,8 +197,12 @@ const NewFormPage = () => {
         <button
           className="newFormMainPageSaveButton"
           onClick={() => {
-            dbmethods.pushItem(new FormDataModel(inputText, formData));
-            history.goBack();
+            if(inputText.length !==0 && formData.length !==0 ){
+              dbmethods.pushItem(new FormDataModel(inputText, formData));
+              history.goBack();
+            } else {
+              alert("Nazwa formularza i elementy nie mogą być puste.");
+            }
           }}
         >
           Zapisz
