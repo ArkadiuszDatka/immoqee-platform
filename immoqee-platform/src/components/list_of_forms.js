@@ -18,7 +18,7 @@ const ListOfForms = (props) => {
     <div className="listOfForms">
       {data.map((item, i) => {
         return (
-          <div className="listOfFormsCard">
+          <div key={i} className="listOfFormsCard">
             <div className="rowElements">
               <h6>{item.data.name}</h6>
               <IconButton
