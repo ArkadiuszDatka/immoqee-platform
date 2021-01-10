@@ -4,6 +4,7 @@ import ListOfForms from "../components/list_of_forms";
 import Select from "react-select";
 import { dbmethods } from "../firebase/dbmethods";
 import firebase from "firebase";
+import { saveAs } from "file-saver";
 import "./home.css";
 import HeaderDataModel from "../data_model/header_data_model";
 import DescriptionDataModel from "../data_model/description_data_model";
@@ -13,7 +14,6 @@ import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { colors } from "@material-ui/core";
-import * as fs from "fs";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 
 const Home = () => {
@@ -87,19 +87,19 @@ const Home = () => {
         ></Select>
       </div>
     ) : (
-        <div>
-          <Select
-            className="select"
-            name="colors"
-            options={options}
-            value={select}
-            onChange={(e) => {
-              setSelect(e);
-              formToComplete.elements[props.index].value = e;
-            }}
-          ></Select>
-        </div>
-      );
+      <div>
+        <Select
+          className="select"
+          name="colors"
+          options={options}
+          value={select}
+          onChange={(e) => {
+            setSelect(e);
+            formToComplete.elements[props.index].value = e;
+          }}
+        ></Select>
+      </div>
+    );
   };
   const HomeStack = () => {
     return (
@@ -224,9 +224,10 @@ const Home = () => {
               ],
             });
 
-            Packer.toBuffer(doc).then((buffer) => {
-              //TODO: nie działą writeFileSync 
-              // fs.writeFileSync("My Document.docx", buffer);
+            Packer.toBlob(doc).then((blob) => {
+              console.log(blob);
+              saveAs(blob, "example.docx");
+              console.log("Document created successfully");
             });
 
             setEdit(false);
