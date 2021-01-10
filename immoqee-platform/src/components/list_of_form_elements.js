@@ -6,10 +6,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { colors } from "@material-ui/core";
 
 const ListOfFormElements = (props) => {
-  const [data, setData] = useState(props.list.data);
+  const [data, setData] = useState(props.list);
 
   useEffect(() => {
-    setData(props.list.data);
+    setData(props.list);
   }, [props]);
 
   return (

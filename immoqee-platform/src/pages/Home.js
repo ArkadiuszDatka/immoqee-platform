@@ -14,7 +14,7 @@ import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { colors } from "@material-ui/core";
-import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, ITableCellMarginOptions } from "docx";
+import { Document, Packer, Paragraph, ShadingType, HeadingLevel, TextRun, Table, TableRow, TableCell, WidthType, ITableCellMarginOptions } from "docx";
 
 const Home = () => {
   const [edit, setEdit] = useState(false);
@@ -200,7 +200,10 @@ const Home = () => {
                       children: [
                         new TableCell({
                           children: [
-                            new Paragraph(element.value)],
+                            new Paragraph({
+                              text: element.value,
+                              heading: HeadingLevel.TITLE,
+                            })],
                           width: {
                             size: 100,
                             type: WidthType.PCT,
@@ -222,17 +225,21 @@ const Home = () => {
                       children: [
                         new TableCell({
                           children: [
-                            new Paragraph(element.value)],
-                            width: {
-                              size: 100,
-                              type: WidthType.PCT,
-                            },
-                            margins: {
-                              top: 100,
-                              bottom: 100,
-                              left: 100,
-                              right: 100,
-                            },
+                            new Paragraph({
+                              text: element.value,
+                              heading: HeadingLevel.HEADING_6,
+                            })
+                          ],
+                          width: {
+                            size: 100,
+                            type: WidthType.PCT,
+                          },
+                          margins: {
+                            top: 100,
+                            bottom: 100,
+                            left: 100,
+                            right: 100,
+                          },
                         }),
                       ],
                     })
@@ -245,30 +252,30 @@ const Home = () => {
                         new TableCell({
                           children: [
                             new Paragraph(element.name)],
-                            width: {
-                              size: 100,
-                              type: WidthType.PCT,
-                            },
-                            margins: {
-                              top: 100,
-                              bottom: 100,
-                              left: 100,
-                              right: 100,
-                            },
+                          width: {
+                            size: 100,
+                            type: WidthType.PCT,
+                          },
+                          margins: {
+                            top: 100,
+                            bottom: 100,
+                            left: 100,
+                            right: 100,
+                          },
                         }),
                         new TableCell({
                           children: [
                             new Paragraph(element.value)],
-                            width: {
-                              size: 100,
-                              type: WidthType.PCT,
-                            },
-                            margins: {
-                              top: 100,
-                              bottom: 100,
-                              left: 100,
-                              right: 100,
-                            },
+                          width: {
+                            size: 100,
+                            type: WidthType.PCT,
+                          },
+                          margins: {
+                            top: 100,
+                            bottom: 100,
+                            left: 100,
+                            right: 100,
+                          },
                         }),
                       ],
                     })
@@ -281,30 +288,30 @@ const Home = () => {
                         new TableCell({
                           children: [
                             new Paragraph(element.name)],
-                            width: {
-                              size: 100,
-                              type: WidthType.PCT,
-                            },
-                            margins: {
-                              top: 100,
-                              bottom: 100,
-                              left: 100,
-                              right: 100,
-                            },
+                          width: {
+                            size: 100,
+                            type: WidthType.PCT,
+                          },
+                          margins: {
+                            top: 100,
+                            bottom: 100,
+                            left: 100,
+                            right: 100,
+                          },
                         }),
                         new TableCell({
                           children: [
                             new Paragraph(element.value.value)],
-                            width: {
-                              size: 100,
-                              type: WidthType.PCT,
-                            },
-                            margins: {
-                              top: 100,
-                              bottom: 100,
-                              left: 100,
-                              right: 100,
-                            },
+                          width: {
+                            size: 100,
+                            type: WidthType.PCT,
+                          },
+                          margins: {
+                            top: 100,
+                            bottom: 100,
+                            left: 100,
+                            right: 100,
+                          },
                         }),
                       ],
                     })
@@ -312,7 +319,7 @@ const Home = () => {
                   break;
                 case "MultipleChoiceList":
                   let value = "";
-                  element.value.forEach((item)=>{
+                  element.value.forEach((item) => {
                     value += `${item.value}, `
                   });
                   rows.push(
@@ -321,30 +328,30 @@ const Home = () => {
                         new TableCell({
                           children: [
                             new Paragraph(element.name)],
-                            width: {
-                              size: 100,
-                              type: WidthType.PCT,
-                            },
-                            margins: {
-                              top: 100,
-                              bottom: 100,
-                              left: 100,
-                              right: 100,
-                            },
+                          width: {
+                            size: 100,
+                            type: WidthType.PCT,
+                          },
+                          margins: {
+                            top: 100,
+                            bottom: 100,
+                            left: 100,
+                            right: 100,
+                          },
                         }),
                         new TableCell({
                           children: [
                             new Paragraph(value)],
-                            width: {
-                              size: 100,
-                              type: WidthType.PCT,
-                            },
-                            margins: {
-                              top: 100,
-                              bottom: 100,
-                              left: 100,
-                              right: 100,
-                            },
+                          width: {
+                            size: 100,
+                            type: WidthType.PCT,
+                          },
+                          margins: {
+                            top: 100,
+                            bottom: 100,
+                            left: 100,
+                            right: 100,
+                          },
                         }),
                       ],
                     })
