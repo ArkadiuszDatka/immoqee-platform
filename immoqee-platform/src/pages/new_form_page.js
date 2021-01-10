@@ -20,12 +20,15 @@ import AddIcon from "@material-ui/icons/Add";
 import FormDataModel from "../data_model/form_data_model";
 import { makeStyles } from "@material-ui/core/styles";
 import { colors } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const NewFormPage = () => {
   const [formData, setFormData] = useState([]);
   const [listItemsData, setListItemsData] = useState([]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
+
+  const history = useHistory();
 
   const [headerInputText, headerSetInputText] = useState("");
   const [descriptionInputText, descriptionSetInputText] = useState("");
@@ -176,6 +179,7 @@ const NewFormPage = () => {
           className="newFormMainPageSaveButton"
           onClick={() => {
             dbmethods.pushItem(new FormDataModel(inputText, formData));
+            history.goBack();
           }}
         >
           Zapisz
