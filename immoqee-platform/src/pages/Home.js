@@ -21,46 +21,33 @@ const Home = () => {
   const [formToComplete, setFormToComplete] = useState(
     new FormDataModel("emptyForm", [])
   );
-  //const [forms, setForms] = useState([]);
+  const [forms, setForms] = useState([]);
   useEffect(() => {
-    // firebase
-    //   .database()
-    //   .ref()
-    //   .on("value", (response) => {
-    //     const data = [];
-    //     response.forEach((item) => {
-    //       data.push({
-    //         data: item.val(),
-    //         key: item.key,
-    //       });
-    //     });
-    //     console.log(data);
-    //     return data;
-    //   });
-  });
-  const forms = [
-    new FormDataModel("name1", [
-      new HeaderDataModel("", "HeaderTitle"),
-      new DescriptionDataModel("", "DescriptionTitle"),
-      new InputDataModel("", "InputTitle", "InputDescription", "hint"),
-      new SingleChoiceListDataModel(
-        "",
-        ["a", "b", "c"],
-        "SingleChoiceListTitle",
-        "SingleChoiceListDescription"
-      ),
-      new MultipleChoiceListDataModel(
-        "",
-        ["a", "b", "d"],
-        "MultipleChoiceListTitle",
-        "MultipleChoiceListDescription"
-      ),
-    ]),
-    new FormDataModel("name2", []),
-    new FormDataModel("name3", []),
-    new FormDataModel("name4", []),
-    new FormDataModel("name5", []),
-  ];
+    dbmethods.fetchItems(setForms);
+  }, []);
+  // const forms = [
+  //   new FormDataModel("name1", [
+  //     new HeaderDataModel("", "HeaderTitle"),
+  //     new DescriptionDataModel("", "DescriptionTitle"),
+  //     new InputDataModel("", "InputTitle", "InputDescription", "hint"),
+  //     new SingleChoiceListDataModel(
+  //       "",
+  //       ["a", "b", "c"],
+  //       "SingleChoiceListTitle",
+  //       "SingleChoiceListDescription"
+  //     ),
+  //     new MultipleChoiceListDataModel(
+  //       "",
+  //       ["a", "b", "d"],
+  //       "MultipleChoiceListTitle",
+  //       "MultipleChoiceListDescription"
+  //     ),
+  //   ]),
+  //   new FormDataModel("name2", []),
+  //   new FormDataModel("name3", []),
+  //   new FormDataModel("name4", []),
+  //   new FormDataModel("name5", []),
+  // ];
 
   const SelectStack = (props) => {
     const [select, setSelect] = useState([]);
@@ -105,7 +92,6 @@ const Home = () => {
     return (
       <div className="home">
         <h1 className="formsTitle">Formularze</h1>
-        {/* <button onClick={dbmethods.pushItem(forms)}> Dodaj folder </button> */}
         <ListOfForms
           list={forms}
           editState={setEdit}

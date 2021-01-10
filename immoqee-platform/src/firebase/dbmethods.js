@@ -1,7 +1,8 @@
 import firebase from "firebase";
+import { convert } from "./convert";
 
 export const dbmethods = {
-  fetchItems: () => {
+  fetchItems: (setState) => {
     firebase
       .database()
       .ref()
@@ -13,7 +14,7 @@ export const dbmethods = {
             key: item.key,
           });
         });
-        return data;
+        setState(convert.convertData(data));
       });
   },
   pushItem: (obj) => {
@@ -27,7 +28,7 @@ export const dbmethods = {
       .catch((error) => console.log(error));
   },
   deleteItem: (key) => {
-    firebase.database().child(key).remove();
+    firebase.database().ref().child(key).remove();
   },
   updateItem: (key) => {
     firebase
