@@ -208,9 +208,19 @@ const Home = () => {
                           new TableCell({
                             children: [
                               new Paragraph({
-                                text: element.value,
-                                heading: HeadingLevel.TITLE,
+                                children: [
+                                  new TextRun({
+                                    text: element.value,
+                                    size: 36,
+                                    bold: true,
+                                  })
+                                ],
                               })],
+                            shading: {
+                                fill: "ebebeb",
+                                val: ShadingType.PERCENT_15,
+                                color: "auto",
+                            },
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -233,10 +243,19 @@ const Home = () => {
                           new TableCell({
                             children: [
                               new Paragraph({
-                                text: element.value,
-                                heading: HeadingLevel.HEADING_6,
+                                children: [
+                                  new TextRun({
+                                    text: element.value,
+                                    size: 18,
+                                  })
+                                ],
                               })
                             ],
+                            shading: {
+                                fill: "ebebeb",
+                                val: ShadingType.PERCENT_5,
+                                color: "auto",
+                            },
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -258,7 +277,20 @@ const Home = () => {
                         children: [
                           new TableCell({
                             children: [
-                              new Paragraph(element.name)],
+                              new Paragraph({
+                                children: [
+                                  new TextRun({
+                                    text: element.name,
+                                    size: 18,
+                                    bold: true
+                                  })
+                                ],
+                                })],
+                              shading: {
+                                  fill: "ebebeb",
+                                  val: ShadingType.PERCENT_5,
+                                  color: "auto",
+                              },
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -272,7 +304,14 @@ const Home = () => {
                           }),
                           new TableCell({
                             children: [
-                              new Paragraph(element.value)],
+                              new Paragraph({
+                                children: [
+                                  new TextRun({
+                                    text: element.value,
+                                    size: 18,
+                                  })
+                                ],
+                                })],
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -294,7 +333,20 @@ const Home = () => {
                         children: [
                           new TableCell({
                             children: [
-                              new Paragraph(element.name)],
+                              new Paragraph({
+                                children: [
+                                  new TextRun({
+                                    text: element.name,
+                                    size: 18,
+                                    bold: true
+                                  })
+                                ],
+                                })],
+                              shading: {
+                                  fill: "ebebeb",
+                                  val: ShadingType.PERCENT_5,
+                                  color: "auto",
+                              },
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -308,7 +360,14 @@ const Home = () => {
                           }),
                           new TableCell({
                             children: [
-                              new Paragraph(element.value.value)],
+                              new Paragraph({
+                                children: [
+                                  new TextRun({
+                                    text: element.value.value,
+                                    size: 18,
+                                  })
+                                ],
+                                })],
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -334,7 +393,20 @@ const Home = () => {
                         children: [
                           new TableCell({
                             children: [
-                              new Paragraph(element.name)],
+                              new Paragraph({
+                                children: [
+                                  new TextRun({
+                                    text: element.name,
+                                    size: 18,
+                                    bold: true
+                                  })
+                                ],
+                                })],
+                              shading: {
+                                  fill: "ebebeb",
+                                  val: ShadingType.PERCENT_5,
+                                  color: "auto",
+                              },
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -348,7 +420,14 @@ const Home = () => {
                           }),
                           new TableCell({
                             children: [
-                              new Paragraph(value)],
+                              new Paragraph({
+                                children: [
+                                  new TextRun({
+                                    text: value,
+                                    size: 18,
+                                  })
+                                ],
+                                })],
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -368,6 +447,7 @@ const Home = () => {
                     break;
                 }
               });
+
               if (rows.length !== 0) {
                 const table = new Table({
                   rows: rows,
@@ -381,7 +461,6 @@ const Home = () => {
                   properties: {},
                   children: [table],
                 });
-
                 Packer.toBlob(doc).then((blob) => {
                   saveAs(blob, formToComplete.name + ".docx");
                 });
