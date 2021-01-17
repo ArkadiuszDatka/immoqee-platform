@@ -56,28 +56,12 @@ export const convert = {
       });
     });
     return _returnData;
-    // const forms = [
-    //   new FormDataModel("name1", [
-    //     new HeaderDataModel("", "HeaderTitle"),
-    //     new DescriptionDataModel("", "DescriptionTitle"),
-    //     new InputDataModel("", "InputTitle", "InputDescription", "hint"),
-    //     new SingleChoiceListDataModel(
-    //       "",
-    //       ["a", "b", "c"],
-    //       "SingleChoiceListTitle",
-    //       "SingleChoiceListDescription"
-    //     ),
-    //     new MultipleChoiceListDataModel(
-    //       "",
-    //       ["a", "b", "d"],
-    //       "MultipleChoiceListTitle",
-    //       "MultipleChoiceListDescription"
-    //     ),
-    //   ]),
-    //   new FormDataModel("name2", []),
-    //   new FormDataModel("name3", []),
-    //   new FormDataModel("name4", []),
-    //   new FormDataModel("name5", []),
-    // ];
+  },
+  convertCompany: (array) => {
+    const _returnData = [];
+    array.forEach((el) => {
+      _returnData.push({ value: el.data.name, label: el.data.name });
+    });
+    return _returnData;
   },
 };

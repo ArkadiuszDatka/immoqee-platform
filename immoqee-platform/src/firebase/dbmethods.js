@@ -17,12 +17,33 @@ export const dbmethods = {
         setState(convert.convertData(data));
       });
   },
-  pushItem: (obj) => {
+  pushCompany: (name) => {
+    firebase.database().ref("company/").push({
+      name: name,
+    });
+  },
+  getCompany: (setState) => {
+    firebase
+      .database()
+      .ref("company/")
+      .on("value", (response) => {
+        const data = [];
+        response.forEach((item) => {
+          data.push({
+            data: item.val(),
+          });
+        });
+        const _data = convert.convertCompany(data);
+        setState(_data);
+      });
+  },
+  pushItem: (name, obj) => {
     // Załatwione
     firebase
       .database()
       .ref()
       .push({
+        company: name,
         obj,
       })
       .catch((error) => console.log(error));

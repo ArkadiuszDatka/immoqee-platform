@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
@@ -27,28 +27,30 @@ const SelectStack = (props) => {
     console.log(props.optionValue);
   }, [props.optionValue]);
 
-  return <div>
-    <Select
-      className="select"
-      name="colors"
-      options={props.options}
-      value={props.optionValue}
-      onChange={(e) => {
-        props.setOptionValue(e);
-      }}
-    ></Select>
-  </div>
+  return (
+    <div>
+      <Select
+        className="select"
+        name="colors"
+        options={props.options}
+        value={props.optionValue}
+        onChange={(e) => {
+          props.setOptionValue(e);
+        }}
+      ></Select>
+    </div>
+  );
 };
 
 const NewFormPage = () => {
+  useEffect(() => {
+    dbmethods.getCompany(setOptions);
+  }, []);
   const [formData, setFormData] = useState([]);
   const [listItemsData, setListItemsData] = useState([]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
-  const [options, setOptions] = useState([
-    { value: 1, label: 1 },
-    { value: 2, label: 2 }
-  ]);
+  const [options, setOptions] = useState([]);
   const [optionValue, setOptionValue] = useState("");
 
   const history = useHistory();
@@ -101,9 +103,9 @@ const NewFormPage = () => {
     setOpenHeaderDialog(true);
   };
   const handleCloseHeaderDialog = (name, save) => {
-    if (save === "true" && name.length !==0) {
+    if (save === "true" && name.length !== 0) {
       setFormData([...formData, new HeaderDataModel("", name)]);
-    } else if (save === "true"){
+    } else if (save === "true") {
       alert("Nazwa nie może być pusta");
     }
     setOpenHeaderDialog(false);
@@ -113,9 +115,9 @@ const NewFormPage = () => {
     setOpenDescriptionDialog(true);
   };
   const handleCloseDescriptionDialog = (name, save) => {
-    if (save === "true" && name.length !==0) {
+    if (save === "true" && name.length !== 0) {
       setFormData([...formData, new DescriptionDataModel("", name)]);
-    } else if (save === "true"){
+    } else if (save === "true") {
       alert("Nazwa nie może być pusta");
     }
     setOpenDescriptionDialog(false);
@@ -125,12 +127,14 @@ const NewFormPage = () => {
     setOpenInputDialog(true);
   };
   const handleCloseInputDialog = (name, desc, hint, save) => {
-    if (save === "true" && 
-    name.length !==0 &&
-    desc.length !==0 &&
-    hint.length !==0) {
+    if (
+      save === "true" &&
+      name.length !== 0 &&
+      desc.length !== 0 &&
+      hint.length !== 0
+    ) {
       setFormData([...formData, new InputDataModel("", name, desc, hint)]);
-    } else if (save === "true"){
+    } else if (save === "true") {
       alert("Nazwa, opis i tekst wypełnienia nie mogą być puste.");
     }
     setOpenInputDialog(false);
@@ -140,16 +144,18 @@ const NewFormPage = () => {
     setOpenSingleChoiceListDialog(true);
   };
   const handleCloseSingleChoiceListDialog = (list, name, desc, save) => {
-    if (save === "true" &&
-    name.length !==0 &&
-    desc.length !==0 &&
-    list.length !==0) {
+    if (
+      save === "true" &&
+      name.length !== 0 &&
+      desc.length !== 0 &&
+      list.length !== 0
+    ) {
       setFormData([
         ...formData,
         new SingleChoiceListDataModel("", list, name, desc),
       ]);
       setListItemsData([]);
-    } else if (save === "true"){
+    } else if (save === "true") {
       alert("Nazwa, opis i lista nie mogą być puste");
     }
     setOpenSingleChoiceListDialog(false);
@@ -159,16 +165,18 @@ const NewFormPage = () => {
     setOpenMultipleChoiceListDialog(true);
   };
   const handleCloseMultipleChoiceListDialog = (list, name, desc, save) => {
-    if (save === "true" &&
-    name.length !==0 &&
-    desc.length !==0 &&
-    list.length !==0) {
+    if (
+      save === "true" &&
+      name.length !== 0 &&
+      desc.length !== 0 &&
+      list.length !== 0
+    ) {
       setFormData([
         ...formData,
         new MultipleChoiceListDataModel("", list, name, desc),
       ]);
       setListItemsData([]);
-    } else if (save === "true"){
+    } else if (save === "true") {
       alert("Nazwa, opis i lista nie mogą być puste");
     }
     setOpenMultipleChoiceListDialog(false);
@@ -185,10 +193,14 @@ const NewFormPage = () => {
         }}
       />
       <div className="selectStackStyle">
-      <SelectStack options={options} optionValue={optionValue} setOptionValue={setOptionValue}/>
+        <SelectStack
+          options={options}
+          optionValue={optionValue}
+          setOptionValue={setOptionValue}
+        />
       </div>
       <h1 className="newFormMainPageH1">Elementy formularza</h1>
-      <ListOfFormElements list={formData} setList={setFormData}/>{" "}
+      <ListOfFormElements list={formData} setList={setFormData} />{" "}
       <div className="newFormMainPageButtonBar">
         <button
           className="newFormMainPageAddButton"
@@ -223,7 +235,11 @@ const NewFormPage = () => {
         <button
           className="newFormMainPageSaveButton"
           onClick={() => {
-            if(inputText.length !==0 && formData.length !==0 && optionValue ===undefined){
+            if (
+              inputText.length !== 0 &&
+              formData.length !== 0 &&
+              optionValue === undefined
+            ) {
               dbmethods.pushItem(new FormDataModel(inputText, formData));
               history.goBack();
             } else {
