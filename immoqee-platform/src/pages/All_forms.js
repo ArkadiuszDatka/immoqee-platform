@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { dbmethods } from "../firebase/dbmethods";
+import "./All_forms.css";
 
 const All_forms = () => {
   const [company, setCompany] = useState("");
@@ -8,12 +9,17 @@ const All_forms = () => {
     console.log(e.target.value);
   };
   const submitChange = () => {
-    dbmethods.pushCompany(company);
+    if(company.length !==0){
+      dbmethods.pushCompany(company);
+      alert("Dodano");
+    } else {
+      alert("Nazwa nie może być pusta");
+    }
   };
   return (
     <div className="all_forms">
-      <input placeholder="Podaj nazwę klienta" onChange={handleChange}></input>
-      <button onClick={submitChange} style={{ width: 100 }}>
+      <input className="allFormsInput" placeholder="Podaj nazwę klienta" onChange={handleChange}></input>
+      <button className="allFormsAddButton" onClick={submitChange} style={{ width: 100 }}>
         Dodaj
       </button>
     </div>

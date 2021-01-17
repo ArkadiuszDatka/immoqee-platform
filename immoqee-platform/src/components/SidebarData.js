@@ -11,7 +11,7 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Wszystkie formularze",
+    title: "Nowa firma",
     path: "all_forms",
     icon: <AiIcons.AiFillFolderOpen />,
     cName: "nav-text",
