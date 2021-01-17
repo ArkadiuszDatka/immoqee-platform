@@ -21,33 +21,26 @@ const Home = () => {
   const [formToComplete, setFormToComplete] = useState(
     new FormDataModel("emptyForm", [])
   );
-  const [forms, setForms] = useState([]);
+  const [forms, setForms] = useState([{
+    business: "firma1",
+    listForms: [
+      new FormDataModel("form1", []),
+      new FormDataModel("form2", []),
+      new FormDataModel("form3", []),
+    ]
+  },{
+    
+    business: "firma2",
+    listForms: [
+      new FormDataModel("form1", []),
+      new FormDataModel("form2", []),
+      new FormDataModel("form3", []),
+    ]
+  }]);
   useEffect(() => {
-    dbmethods.fetchItems(setForms);
+    //TODO: zmodyfikować bazę 
+    // dbmethods.fetchItems(setForms);
   }, []);
-  // const forms = [
-  //   new FormDataModel("name1", [
-  //     new HeaderDataModel("", "HeaderTitle"),
-  //     new DescriptionDataModel("", "DescriptionTitle"),
-  //     new InputDataModel("", "InputTitle", "InputDescription", "hint"),
-  //     new SingleChoiceListDataModel(
-  //       "",
-  //       ["a", "b", "c"],
-  //       "SingleChoiceListTitle",
-  //       "SingleChoiceListDescription"
-  //     ),
-  //     new MultipleChoiceListDataModel(
-  //       "",
-  //       ["a", "b", "d"],
-  //       "MultipleChoiceListTitle",
-  //       "MultipleChoiceListDescription"
-  //     ),
-  //   ]),
-  //   new FormDataModel("name2", []),
-  //   new FormDataModel("name3", []),
-  //   new FormDataModel("name4", []),
-  //   new FormDataModel("name5", []),
-  // ];
 
   const SelectStack = (props) => {
     const [select, setSelect] = useState([]);
@@ -91,7 +84,7 @@ const Home = () => {
   const HomeStack = () => {
     return (
       <div className="home">
-        <h1 className="formsTitle">Formularze</h1>
+        <h3 className="formsTitle">Formularze</h3>
         <ListOfForms
           list={forms}
           editState={setEdit}
@@ -456,7 +449,6 @@ const Home = () => {
                     type: WidthType.DXA,
                   },
                 });
-
                 doc.addSection({
                   properties: {},
                   children: [table],

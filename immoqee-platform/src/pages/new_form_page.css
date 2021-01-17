@@ -13,6 +13,15 @@
 .newFormMainPageButton {
   margin-left: 20;
 }
+.selectStackStyle{
+margin-left: 5%;
+margin-right: 5%;
+}
+
+.select{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 .newFormMainPageAddButton {
   background-color: #35e1b8;

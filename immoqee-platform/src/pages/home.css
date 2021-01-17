@@ -1,6 +1,6 @@
 .home {
+  margin-top: 100px;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
 }
 
@@ -10,9 +10,9 @@
   margin-bottom: 10px;
 }
 
-.formsTitle {
-    margin-top: 10%;
-    margin-bottom: 10%;
+.home h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .editStack {

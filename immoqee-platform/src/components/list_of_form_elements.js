@@ -16,7 +16,7 @@ const ListOfFormElements = (props) => {
     <div className="listOfElements">
       {data.map((item, i) => {
         return (
-          <div className="listOfElementsCard">
+          <div className="listOfElementsCard" key={i}>
             <div>
               <h3>{item.type}</h3>
               <p>{item.name}</p>
@@ -26,7 +26,14 @@ const ListOfFormElements = (props) => {
               style={{ color: colors.grey }}
               aria-label="Cofnij"
               onClick={(e) => {
-                setData(data.splice(i, 1));
+                let newList = [];
+                data.forEach(element => {
+                  if(element.name !== item.name){
+                    newList.push(element);
+                  }
+                });
+                setData(newList);
+                props.setList(newList);
               }}
             >
               <DeleteIcon />

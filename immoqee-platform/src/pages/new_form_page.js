@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState, Component, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
@@ -22,11 +22,34 @@ import { makeStyles } from "@material-ui/core/styles";
 import { colors } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
+const SelectStack = (props) => {
+  useEffect(() => {
+    console.log(props.optionValue);
+  }, [props.optionValue]);
+
+  return <div>
+    <Select
+      className="select"
+      name="colors"
+      options={props.options}
+      value={props.optionValue}
+      onChange={(e) => {
+        props.setOptionValue(e);
+      }}
+    ></Select>
+  </div>
+};
+
 const NewFormPage = () => {
   const [formData, setFormData] = useState([]);
   const [listItemsData, setListItemsData] = useState([]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [options, setOptions] = useState([
+    { value: 1, label: 1 },
+    { value: 2, label: 2 }
+  ]);
+  const [optionValue, setOptionValue] = useState("");
 
   const history = useHistory();
 
@@ -161,8 +184,11 @@ const NewFormPage = () => {
           setInputText(e.target.value);
         }}
       />
+      <div className="selectStackStyle">
+      <SelectStack options={options} optionValue={optionValue} setOptionValue={setOptionValue}/>
+      </div>
       <h1 className="newFormMainPageH1">Elementy formularza</h1>
-      <ListOfFormElements list={formData} />{" "}
+      <ListOfFormElements list={formData} setList={setFormData}/>{" "}
       <div className="newFormMainPageButtonBar">
         <button
           className="newFormMainPageAddButton"
@@ -197,11 +223,11 @@ const NewFormPage = () => {
         <button
           className="newFormMainPageSaveButton"
           onClick={() => {
-            if(inputText.length !==0 && formData.length !==0 ){
+            if(inputText.length !==0 && formData.length !==0 && optionValue ===undefined){
               dbmethods.pushItem(new FormDataModel(inputText, formData));
               history.goBack();
             } else {
-              alert("Nazwa formularza i elementy nie mogą być puste.");
+              alert("Nazwa formularza, firma i elementy nie mogą być puste.");
             }
           }}
         >

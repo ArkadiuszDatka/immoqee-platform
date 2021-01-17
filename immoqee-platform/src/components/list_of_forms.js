@@ -15,36 +15,45 @@ const ListOfForms = (props) => {
   }, [props]);
 
   return (
-    <div className="listOfForms">
-      {data.map((item, i) => {
+    <div className="listOfLists">
+      {data.map((itemG, i) => {
         return (
-          <div key={i} className="listOfFormsCard">
-            <div className="rowElements">
-              <h6>{item.data.name}</h6>
-              <IconButton
-                id="btn"
-                className="btton"
-                style={{ color: colors.grey }}
-                aria-label="Uzupełnij"
-                onClick={(e) => {
-                  props.editForm(data[i].data);
-                  props.editState(true);
-                }}
-              >
-                <AddIcon />
-              </IconButton>
-              <IconButton
-                id="btn"
-                className="btton"
-                style={{ color: colors.grey }}
-                aria-label="Usuń"
-                onClick={(e) => {
-                  dbmethods.deleteItem(data[i].key);
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </div>
+          <div key={i} className="businessCard">
+            <h6 className="businessTitle">{itemG.business}</h6>
+            <div className="listOfForms">
+              {itemG.listForms.map((item, i) => {
+                return (
+                  <div key={i} className="listOfFormsCard">
+                    <div className="rowElements">
+                      <h6>{item.name}</h6>
+                      <IconButton
+                        id="btn"
+                        className="btton"
+                        style={{ color: colors.grey }}
+                        aria-label="Uzupełnij"
+                        onClick={(e) => {
+                          props.editForm(item);
+                          props.editState(true);
+                        }}
+                      >
+                        <AddIcon />
+                      </IconButton>
+                      <IconButton
+                        id="btn"
+                        className="btton"
+                        style={{ color: colors.grey }}
+                        aria-label="Usuń"
+                        onClick={(e) => {
+                          dbmethods.deleteItem(data[i].key);
+                        }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </div>
+                  </div>
+                );
+              })}
+            </div> 
           </div>
         );
       })}
@@ -53,3 +62,4 @@ const ListOfForms = (props) => {
 };
 
 export default ListOfForms;
+
