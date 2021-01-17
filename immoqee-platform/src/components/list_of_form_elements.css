@@ -9,9 +9,10 @@
   padding: 20px 20px;
   margin: 5px;
   border: none;
-  border-radius: 20px;
-  width: min-content;
-  float: left;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
   color: white;
 }
 p {
@@ -19,4 +20,13 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 200px;
+}
+
+.listOfElementsCard #btn {
+  width: fit-content;
+}
+
+.listOfElementsCard #btn:hover {
+  background-color: #35e1b8;
+  color: white;
 }

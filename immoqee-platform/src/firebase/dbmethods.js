@@ -1,28 +1,34 @@
 import firebase from "firebase";
+import { convert } from "./convert";
 
 export const dbmethods = {
-  fetchItems: () => {
-    firebase.database().on("value", (response) => {
-      const data = [];
-      response.forEach((item) => {
-        data.push({
-          info: item.val(),
-          key: item.key,
-        });
-      });
-      return data;
-    });
-  },
-  pushItem: (obj) => {
+  fetchItems: (setState) => {
     firebase
       .database()
+      .ref()
+      .on("value", (response) => {
+        const data = [];
+        response.forEach((item) => {
+          data.push({
+            data: item.val(),
+            key: item.key,
+          });
+        });
+        setState(convert.convertData(data));
+      });
+  },
+  pushItem: (obj) => {
+    // Załatwione
+    firebase
+      .database()
+      .ref()
       .push({
-        /* TODO: Trzeba uzgodnić co wysyłamy dokładnie do bazy */
+        obj,
       })
       .catch((error) => console.log(error));
   },
   deleteItem: (key) => {
-    firebase.database().child(key).remove();
+    firebase.database().ref().child(key).remove();
   },
   updateItem: (key) => {
     firebase

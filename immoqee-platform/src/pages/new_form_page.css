@@ -17,7 +17,7 @@
 .newFormMainPageAddButton {
   background-color: #35e1b8;
   border: none;
-  border-radius: 12px;
+  border-radius: 4px;
   color: white;
   padding: 8px 16px;
   text-align: center;
@@ -32,7 +32,7 @@
 .newFormMainPageSaveButton {
   background-color: #e84646;
   border: none;
-  border-radius: 12px;
+  border-radius: 4px;
   color: white;
   padding: 8px 16px;
   text-align: center;
@@ -53,12 +53,12 @@
 
 .newFormMainPageInput {
   width: 90%;
-  border: 2px solid #35e1b8;
-  padding: 8px 16px;
-  border-radius: 12px;
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 5px;
+  border: 1px solid #cccccc;
+  padding: 18px 16px;
+  border-radius: 4px;
 }
 .newFormMainPageInput:focus {
   outline: none;
@@ -66,19 +66,23 @@
 
 .newItemInput {
   width: 100%;
-  border: 2px solid #35e1b8;
-  padding: 8px 16px;
-  border-radius: 12px;
+  border: 1px solid #cccccc;
+  padding: 18px 16px;
+  border-radius: 4px;
   height: min-content;
 }
 .newItemInput:focus {
   outline: none;
 }
 
-.newItemInputComponent{
+.newItemInputComponent {
   width: 90%;
   margin-left: 5%;
   margin-bottom: 5px;
   display: flex;
   flex-direction: row;
+}
+
+.newItemInputComponent #btn {
+  width: fit-content;
 }

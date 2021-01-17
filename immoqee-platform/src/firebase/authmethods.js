@@ -2,7 +2,7 @@ import firebase from "firebase";
 import firebaseconfig from "./firebaseIndex";
 
 export const authMethods = {
-  signin: (name, password, setErrors, setToken) => {
+  signin: (name, password, setErrors, setToken, setInputs) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(
@@ -13,6 +13,8 @@ export const authMethods = {
         const token = await Object.entries(res.user)[5][1].b;
         await localStorage.setItem("token", token);
         setToken(window.localStorage.token);
+        setInputs({ name: "", password: "" });
+        setErrors([]);
       })
       .catch((err) => {
         setErrors((prev) => [...prev, err.message]);

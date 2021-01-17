@@ -10,11 +10,26 @@
     padding: 20px 20px;
     margin: 5px;
     border: none;
-    border-radius: 20px;
+    border-radius: 4px;
     width: min-content;
     float: left;
     color: white;
   }
   .listOfFormsCard:focus {
     outline: none;
+  }
+  
+  .rowElements{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .rowElements #btn{
+    width: fit-content;
+  }
+
+  .rowElements #btn:hover {
+    background-color: #35e1b8;
+    color: white;
   }

@@ -7,6 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Select from "react-select";
+import { dbmethods } from "../firebase/dbmethods";
 import "./new_form_page.css";
 import ListOfFormElements from "../components/list_of_form_elements";
 import HeaderDataModel from "../data_model/header_data_model";
@@ -16,14 +17,18 @@ import SingleChoiceListDataModel from "../data_model/single_choice_list_data_mod
 import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data_model";
 import ListOfItems from "../components/list_of_items";
 import AddIcon from "@material-ui/icons/Add";
+import FormDataModel from "../data_model/form_data_model";
 import { makeStyles } from "@material-ui/core/styles";
 import { colors } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const NewFormPage = () => {
   const [formData, setFormData] = useState([]);
   const [listItemsData, setListItemsData] = useState([]);
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
+
+  const history = useHistory();
 
   const [headerInputText, headerSetInputText] = useState("");
   const [descriptionInputText, descriptionSetInputText] = useState("");
@@ -72,49 +77,78 @@ const NewFormPage = () => {
   const handleClickOpenHeaderDialog = () => {
     setOpenHeaderDialog(true);
   };
-  const handleCloseHeaderDialog = (name) => {
+  const handleCloseHeaderDialog = (name, save) => {
+    if (save === "true" && name.length !==0) {
+      setFormData([...formData, new HeaderDataModel("", name)]);
+    } else if (save === "true"){
+      alert("Nazwa nie może być pusta");
+    }
     setOpenHeaderDialog(false);
-    setFormData([...formData, new HeaderDataModel("", name)]);
   };
 
   const handleClickOpenDescriptionDialog = () => {
     setOpenDescriptionDialog(true);
   };
-  const handleCloseDescriptionDialog = (name) => {
+  const handleCloseDescriptionDialog = (name, save) => {
+    if (save === "true" && name.length !==0) {
+      setFormData([...formData, new DescriptionDataModel("", name)]);
+    } else if (save === "true"){
+      alert("Nazwa nie może być pusta");
+    }
     setOpenDescriptionDialog(false);
-    setFormData([...formData, new DescriptionDataModel("", name)]);
   };
 
   const handleClickOpenInputDialog = () => {
     setOpenInputDialog(true);
   };
-  const handleCloseInputDialog = (name, desc, hint) => {
+  const handleCloseInputDialog = (name, desc, hint, save) => {
+    if (save === "true" && 
+    name.length !==0 &&
+    desc.length !==0 &&
+    hint.length !==0) {
+      setFormData([...formData, new InputDataModel("", name, desc, hint)]);
+    } else if (save === "true"){
+      alert("Nazwa, opis i tekst wypełnienia nie mogą być puste.");
+    }
     setOpenInputDialog(false);
-    setFormData([...formData, new InputDataModel("", name, desc, hint)]);
   };
 
   const handleClickOpenSingleChoiceListDialog = () => {
     setOpenSingleChoiceListDialog(true);
   };
-  const handleCloseSingleChoiceListDialog = (list, name, desc) => {
+  const handleCloseSingleChoiceListDialog = (list, name, desc, save) => {
+    if (save === "true" &&
+    name.length !==0 &&
+    desc.length !==0 &&
+    list.length !==0) {
+      setFormData([
+        ...formData,
+        new SingleChoiceListDataModel("", list, name, desc),
+      ]);
+      setListItemsData([]);
+    } else if (save === "true"){
+      alert("Nazwa, opis i lista nie mogą być puste");
+    }
     setOpenSingleChoiceListDialog(false);
-    setFormData([
-      ...formData,
-      new SingleChoiceListDataModel("", list, name, desc),
-    ]);
-    setListItemsData([]);
   };
 
   const handleClickOpenMultipleChoiceListDialog = () => {
     setOpenMultipleChoiceListDialog(true);
   };
-  const handleCloseMultipleChoiceListDialog = (list, name, desc) => {
+  const handleCloseMultipleChoiceListDialog = (list, name, desc, save) => {
+    if (save === "true" &&
+    name.length !==0 &&
+    desc.length !==0 &&
+    list.length !==0) {
+      setFormData([
+        ...formData,
+        new MultipleChoiceListDataModel("", list, name, desc),
+      ]);
+      setListItemsData([]);
+    } else if (save === "true"){
+      alert("Nazwa, opis i lista nie mogą być puste");
+    }
     setOpenMultipleChoiceListDialog(false);
-    setFormData([
-      ...formData,
-      new MultipleChoiceListDataModel("", list, name, desc),
-    ]);
-    setListItemsData([]);
   };
 
   return (
@@ -160,7 +194,17 @@ const NewFormPage = () => {
         >
           Dodaj listę wielokrotnego wyboru
         </button>
-        <button className="newFormMainPageSaveButton" onClick={() => {}}>
+        <button
+          className="newFormMainPageSaveButton"
+          onClick={() => {
+            if(inputText.length !==0 && formData.length !==0 ){
+              dbmethods.pushItem(new FormDataModel(inputText, formData));
+              history.goBack();
+            } else {
+              alert("Nazwa formularza i elementy nie mogą być puste.");
+            }
+          }}
+        >
           Zapisz
         </button>
 
@@ -181,7 +225,9 @@ const NewFormPage = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => handleCloseHeaderDialog(headerInputText)}>
+            <Button
+              onClick={() => handleCloseHeaderDialog(headerInputText, "true")}
+            >
               Dodaj
             </Button>
           </DialogActions>
@@ -204,7 +250,9 @@ const NewFormPage = () => {
           </DialogContent>
           <DialogActions>
             <Button
-              onClick={() => handleCloseDescriptionDialog(descriptionInputText)}
+              onClick={() =>
+                handleCloseDescriptionDialog(descriptionInputText, "true")
+              }
             >
               Dodaj
             </Button>
@@ -246,7 +294,8 @@ const NewFormPage = () => {
                 handleCloseInputDialog(
                   inputNameInputText,
                   inputDescInputText,
-                  inputHintInputText
+                  inputHintInputText,
+                  "true"
                 )
               }
             >
@@ -285,6 +334,7 @@ const NewFormPage = () => {
                 }}
               />
               <IconButton
+                id="btn"
                 style={{ color: colors.grey }}
                 aria-label="Dodaj"
                 onClick={(e) => {
@@ -305,7 +355,8 @@ const NewFormPage = () => {
                 handleCloseSingleChoiceListDialog(
                   listItemsData,
                   singleChoiceListNameInputText,
-                  singleChoiceListDescInputText
+                  singleChoiceListDescInputText,
+                  "true"
                 )
               }
             >
@@ -344,6 +395,7 @@ const NewFormPage = () => {
                 }}
               />
               <IconButton
+                id="btn"
                 style={{ color: colors.grey }}
                 aria-label="Dodaj"
                 onClick={(e) => {
@@ -364,7 +416,8 @@ const NewFormPage = () => {
                 handleCloseMultipleChoiceListDialog(
                   listItemsData,
                   multipleChoiceListNameInputText,
-                  multipleChoiceListDescInputText
+                  multipleChoiceListDescInputText,
+                  "true"
                 )
               }
             >
