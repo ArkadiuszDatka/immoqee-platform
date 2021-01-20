@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./list_of_forms.css";
-import Button from "@material-ui/core/Button";
 import { dbmethods } from "../firebase/dbmethods";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -14,14 +13,22 @@ const ListOfForms = (props) => {
     setData(props.list);
   }, [props]);
 
+  /*
+    COŚ TAKIEGO POTRZEBUJEMY:
+    {
+      company: nazwa,
+      forms: []
+    }
+  */
+
   return (
     <div className="listOfLists">
       {data.map((itemG, i) => {
         return (
           <div key={i} className="businessCard">
-            <h6 className="businessTitle">{itemG.business}</h6>
+            <h6 className="businessTitle">{itemG.company}</h6>
             <div className="listOfForms">
-              {itemG.listForms.map((item, i) => {
+              {/* {itemG.forms.map((item, i) => {
                 return (
                   <div key={i} className="listOfFormsCard">
                     <div className="rowElements">
@@ -52,8 +59,8 @@ const ListOfForms = (props) => {
                     </div>
                   </div>
                 );
-              })}
-            </div> 
+              })} */}
+            </div>
           </div>
         );
       })}
@@ -62,4 +69,3 @@ const ListOfForms = (props) => {
 };
 
 export default ListOfForms;
-

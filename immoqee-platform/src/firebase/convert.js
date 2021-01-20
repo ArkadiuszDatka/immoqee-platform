@@ -13,6 +13,8 @@ export const convert = {
            obj ma nazwę oraz elements
         */
     const _returnData = [];
+    const temp_table = [];
+    const returnData = [];
     array.forEach((el) => {
       let _elements = el.data.obj.elements;
       let elements = [];
@@ -49,11 +51,46 @@ export const convert = {
           default:
             break;
         }
-      });
+      });      
+      /*
+      COŚ TAKIEGO POTRZEBUJEMY:
+      const [forms, setForms] = useState([{
+      business: "firma1",
+      listForms: [
+        new FormDataModel("form1", []),
+        new FormDataModel("form2", []),
+        new FormDataModel("form3", []),
+      ]
+      },
+      {
+      business: "firma2",
+      listForms: [
+        new FormDataModel("form1", []),
+        new FormDataModel("form2", []),
+        new FormDataModel("form3", []),
+      ]
+      }]);
+      */     
       _returnData.push({
         key: el.key,
+        company: el.data.company,
         data: new FormDataModel(_name, elements),
       });
+      let form_object = {
+        key: el.key,
+        company: el.data.company,
+        data: new FormDataModel(_name, elements),
+      }
+      let expression = obj => obj.name === el.data.company
+      let expression_index = temp_table.indexOf(expression);
+      if(expression_index === -1){
+        temp_table.push([{
+          business: el.data.company,
+          listForms: form_object
+        }])
+      }else(
+        //temp_table[expression_index].
+      )
     });
     return _returnData;
   },

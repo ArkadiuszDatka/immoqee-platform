@@ -14,33 +14,33 @@ import MultipleChoiceListDataModel from "../data_model/multiple_choice_list_data
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { colors } from "@material-ui/core";
-import { Document, Packer, Paragraph, ShadingType, HeadingLevel, TextRun, Table, TableRow, TableCell, WidthType, ITableCellMarginOptions } from "docx";
+import {
+  Document,
+  Packer,
+  Paragraph,
+  ShadingType,
+  HeadingLevel,
+  TextRun,
+  Table,
+  TableRow,
+  TableCell,
+  WidthType,
+  ITableCellMarginOptions,
+} from "docx";
 
 const Home = () => {
   const [edit, setEdit] = useState(false);
   const [formToComplete, setFormToComplete] = useState(
     new FormDataModel("emptyForm", [])
   );
-  const [forms, setForms] = useState([{
-    business: "firma1",
-    listForms: [
-      new FormDataModel("form1", []),
-      new FormDataModel("form2", []),
-      new FormDataModel("form3", []),
-    ]
-  },{
-    
-    business: "firma2",
-    listForms: [
-      new FormDataModel("form1", []),
-      new FormDataModel("form2", []),
-      new FormDataModel("form3", []),
-    ]
-  }]);
+  const [forms, setForms] = useState([]);
   useEffect(() => {
-    //TODO: zmodyfikować bazę 
-    // dbmethods.fetchItems(setForms);
+    //TODO: zmodyfikować bazę
+    dbmethods.fetchItems(setForms);
   }, []);
+  useEffect(() => {
+    console.log(forms);
+  }, [forms]);
 
   const SelectStack = (props) => {
     const [select, setSelect] = useState([]);
@@ -67,19 +67,19 @@ const Home = () => {
         ></Select>
       </div>
     ) : (
-        <div>
-          <Select
-            className="select"
-            name="colors"
-            options={options}
-            value={select}
-            onChange={(e) => {
-              setSelect(e);
-              formToComplete.elements[props.index].value = e;
-            }}
-          ></Select>
-        </div>
-      );
+      <div>
+        <Select
+          className="select"
+          name="colors"
+          options={options}
+          value={select}
+          onChange={(e) => {
+            setSelect(e);
+            formToComplete.elements[props.index].value = e;
+          }}
+        ></Select>
+      </div>
+    );
   };
   const HomeStack = () => {
     return (
@@ -206,13 +206,14 @@ const Home = () => {
                                     text: element.value,
                                     size: 36,
                                     bold: true,
-                                  })
+                                  }),
                                 ],
-                              })],
+                              }),
+                            ],
                             shading: {
-                                fill: "ebebeb",
-                                val: ShadingType.PERCENT_15,
-                                color: "auto",
+                              fill: "ebebeb",
+                              val: ShadingType.PERCENT_15,
+                              color: "auto",
                             },
                             width: {
                               size: 100,
@@ -240,14 +241,14 @@ const Home = () => {
                                   new TextRun({
                                     text: element.value,
                                     size: 18,
-                                  })
+                                  }),
                                 ],
-                              })
+                              }),
                             ],
                             shading: {
-                                fill: "ebebeb",
-                                val: ShadingType.PERCENT_5,
-                                color: "auto",
+                              fill: "ebebeb",
+                              val: ShadingType.PERCENT_5,
+                              color: "auto",
                             },
                             width: {
                               size: 100,
@@ -275,15 +276,16 @@ const Home = () => {
                                   new TextRun({
                                     text: element.name,
                                     size: 18,
-                                    bold: true
-                                  })
+                                    bold: true,
+                                  }),
                                 ],
-                                })],
-                              shading: {
-                                  fill: "ebebeb",
-                                  val: ShadingType.PERCENT_5,
-                                  color: "auto",
-                              },
+                              }),
+                            ],
+                            shading: {
+                              fill: "ebebeb",
+                              val: ShadingType.PERCENT_5,
+                              color: "auto",
+                            },
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -302,9 +304,10 @@ const Home = () => {
                                   new TextRun({
                                     text: element.value,
                                     size: 18,
-                                  })
+                                  }),
                                 ],
-                                })],
+                              }),
+                            ],
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -331,15 +334,16 @@ const Home = () => {
                                   new TextRun({
                                     text: element.name,
                                     size: 18,
-                                    bold: true
-                                  })
+                                    bold: true,
+                                  }),
                                 ],
-                                })],
-                              shading: {
-                                  fill: "ebebeb",
-                                  val: ShadingType.PERCENT_5,
-                                  color: "auto",
-                              },
+                              }),
+                            ],
+                            shading: {
+                              fill: "ebebeb",
+                              val: ShadingType.PERCENT_5,
+                              color: "auto",
+                            },
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -358,9 +362,10 @@ const Home = () => {
                                   new TextRun({
                                     text: element.value.value,
                                     size: 18,
-                                  })
+                                  }),
                                 ],
-                                })],
+                              }),
+                            ],
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -379,7 +384,7 @@ const Home = () => {
                   case "MultipleChoiceList":
                     let value = "";
                     element.value.forEach((item) => {
-                      value += `${item.value}, `
+                      value += `${item.value}, `;
                     });
                     rows.push(
                       new TableRow({
@@ -391,15 +396,16 @@ const Home = () => {
                                   new TextRun({
                                     text: element.name,
                                     size: 18,
-                                    bold: true
-                                  })
+                                    bold: true,
+                                  }),
                                 ],
-                                })],
-                              shading: {
-                                  fill: "ebebeb",
-                                  val: ShadingType.PERCENT_5,
-                                  color: "auto",
-                              },
+                              }),
+                            ],
+                            shading: {
+                              fill: "ebebeb",
+                              val: ShadingType.PERCENT_5,
+                              color: "auto",
+                            },
                             width: {
                               size: 100,
                               type: WidthType.PCT,
@@ -418,9 +424,10 @@ const Home = () => {
                                   new TextRun({
                                     text: value,
                                     size: 18,
-                                  })
+                                  }),
                                 ],
-                                })],
+                              }),
+                            ],
                             width: {
                               size: 100,
                               type: WidthType.PCT,

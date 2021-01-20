@@ -5,13 +5,13 @@ export const dbmethods = {
   fetchItems: (setState) => {
     firebase
       .database()
-      .ref()
+      .ref("forms")
       .on("value", (response) => {
         const data = [];
         response.forEach((item) => {
           data.push({
-            data: item.val(),
             key: item.key,
+            data: item.val(),
           });
         });
         setState(convert.convertData(data));
@@ -41,8 +41,9 @@ export const dbmethods = {
     // Załatwione
     firebase
       .database()
-      .ref("forms/" + name)
+      .ref("forms/")
       .push({
+        company: name,
         obj,
       })
       .catch((error) => console.log(error));
