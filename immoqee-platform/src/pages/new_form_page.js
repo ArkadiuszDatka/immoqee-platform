@@ -51,7 +51,7 @@ const NewFormPage = () => {
   const [selectItems, setSelectItems] = useState([]);
   const [inputText, setInputText] = useState("");
   const [options, setOptions] = useState([]);
-  const [optionValue, setOptionValue] = useState("");
+  const [optionValue, setOptionValue] = useState(undefined);
 
   const history = useHistory();
 
@@ -85,19 +85,16 @@ const NewFormPage = () => {
     multipleChoiceListNewItemSetInputText,
   ] = useState("");
 
-  const [openHeaderDialog, setOpenHeaderDialog] = React.useState(false);
-  const [openDescriptionDialog, setOpenDescriptionDialog] = React.useState(
+  const [openHeaderDialog, setOpenHeaderDialog] = useState(false);
+  const [openDescriptionDialog, setOpenDescriptionDialog] = useState(false);
+  const [openInputDialog, setOpenInputDialog] = useState(false);
+  const [openSingleChoiceListDialog, setOpenSingleChoiceListDialog] = useState(
     false
   );
-  const [openInputDialog, setOpenInputDialog] = React.useState(false);
-  const [
-    openSingleChoiceListDialog,
-    setOpenSingleChoiceListDialog,
-  ] = React.useState(false);
   const [
     openMultipleChoiceListDialog,
     setOpenMultipleChoiceListDialog,
-  ] = React.useState(false);
+  ] = useState(false);
 
   const handleClickOpenHeaderDialog = () => {
     setOpenHeaderDialog(true);
@@ -238,9 +235,12 @@ const NewFormPage = () => {
             if (
               inputText.length !== 0 &&
               formData.length !== 0 &&
-              optionValue === undefined
+              optionValue !== undefined
             ) {
-              dbmethods.pushItem(new FormDataModel(inputText, formData));
+              dbmethods.pushItem(
+                optionValue.value,
+                new FormDataModel(inputText, formData)
+              );
               history.goBack();
             } else {
               alert("Nazwa formularza, firma i elementy nie mogą być puste.");

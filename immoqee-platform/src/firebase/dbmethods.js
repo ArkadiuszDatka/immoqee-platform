@@ -41,9 +41,8 @@ export const dbmethods = {
     // Załatwione
     firebase
       .database()
-      .ref()
+      .ref("forms/" + name)
       .push({
-        company: name,
         obj,
       })
       .catch((error) => console.log(error));
