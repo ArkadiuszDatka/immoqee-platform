@@ -14,7 +14,6 @@ export const convert = {
         */
     const _returnData = [];
     const temp_table = [];
-    const returnData = [];
     array.forEach((el) => {
       let _elements = el.data.obj.elements;
       let elements = [];
@@ -51,7 +50,7 @@ export const convert = {
           default:
             break;
         }
-      });      
+      });
       /*
       COŚ TAKIEGO POTRZEBUJEMY:
       const [forms, setForms] = useState([{
@@ -70,7 +69,7 @@ export const convert = {
         new FormDataModel("form3", []),
       ]
       }]);
-      */     
+      */
       _returnData.push({
         key: el.key,
         company: el.data.company,
@@ -80,19 +79,21 @@ export const convert = {
         key: el.key,
         company: el.data.company,
         data: new FormDataModel(_name, elements),
-      }
-      let expression = obj => obj.name === el.data.company
-      let expression_index = temp_table.indexOf(expression);
-      if(expression_index === -1){
-        temp_table.push([{
+      };
+      let pos = temp_table
+        .map((e) => {
+          return e.business;
+        })
+        .indexOf(el.data.company);
+
+      if (pos === -1) {
+        temp_table.push({
           business: el.data.company,
-          listForms: form_object
-        }])
-      }else(
-        //temp_table[expression_index].
-      )
+          listForms: [form_object],
+        });
+      } else temp_table[pos].listForms.push(form_object);
     });
-    return _returnData;
+    return temp_table;
   },
   convertCompany: (array) => {
     const _returnData = [];

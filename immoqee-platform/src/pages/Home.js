@@ -38,9 +38,6 @@ const Home = () => {
     //TODO: zmodyfikować bazę
     dbmethods.fetchItems(setForms);
   }, []);
-  useEffect(() => {
-    console.log(forms);
-  }, [forms]);
 
   const SelectStack = (props) => {
     const [select, setSelect] = useState([]);
