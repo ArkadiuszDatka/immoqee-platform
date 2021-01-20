@@ -29,6 +29,7 @@ const ListOfForms = (props) => {
             <h6 className="businessTitle">{itemG.business}</h6>
             <div className="listOfForms">
               {itemG.listForms.map((item, i) => {
+                console.log(item);
                 return (
                   <div key={i} className="listOfFormsCard">
                     <div className="rowElements">
@@ -51,6 +52,7 @@ const ListOfForms = (props) => {
                         style={{ color: colors.grey }}
                         aria-label="Usuń"
                         onClick={(e) => {
+                          console.log(itemG.business + " - " + item.key);
                           dbmethods.deleteItem(item.key);
                         }}
                       >

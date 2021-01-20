@@ -49,7 +49,7 @@ export const dbmethods = {
       .catch((error) => console.log(error));
   },
   deleteItem: (key) => {
-    firebase.database().ref().child(key).remove();
+    firebase.database().ref("forms").child(key).remove();
   },
   updateItem: (key) => {
     firebase
