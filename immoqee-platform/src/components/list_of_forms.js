@@ -33,7 +33,7 @@ const ListOfForms = (props) => {
                 return (
                   <div key={i} className="listOfFormsCard">
                     <div className="rowElements">
-                      <h6>{item.data.name}</h6>
+                      <h6 className="elementTitle">{item.data.name}</h6>
                       <IconButton
                         id="btn"
                         className="btton"

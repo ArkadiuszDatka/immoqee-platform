@@ -80,7 +80,7 @@ const Home = () => {
   };
   const HomeStack = () => {
     return (
-      <div className="home">
+      <div className="homeStack">
         <h3 className="formsTitle">Formularze</h3>
         <ListOfForms
           list={forms}

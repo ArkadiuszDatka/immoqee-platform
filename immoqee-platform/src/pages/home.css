@@ -1,5 +1,4 @@
 .home {
- padding-top: 30%;
   display: flex;
   flex-direction: column;
 }
@@ -10,9 +9,18 @@
   margin-bottom: 10px;
 }
 
-.home h3 {
+.homeStack{
+  padding: 3%;
+}
+
+.homeStack h3 {
+    padding-left: 5%;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.formsTitle{
+  font-size: 48px;
 }
 
 .editStack {
