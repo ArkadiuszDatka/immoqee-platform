@@ -449,7 +449,7 @@ const Home = () => {
                 const table = new Table({
                   rows: rows,
                   width: {
-                    size: 9000,
+                    size: 9200,
                     type: WidthType.DXA,
                   },
                 });
