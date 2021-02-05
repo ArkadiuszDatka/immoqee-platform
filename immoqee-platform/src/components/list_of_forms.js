@@ -52,8 +52,10 @@ const ListOfForms = (props) => {
                         style={{ color: colors.grey }}
                         aria-label="Usuń"
                         onClick={(e) => {
-                          console.log(itemG.business + " - " + item.key);
-                          dbmethods.deleteItem(item.key);
+                          let decision = window.confirm(
+                            "Nie ma możliwości przywrócenia usuniętego elementu\nNa pewno chcesz usunąć element?"
+                          );
+                          if (decision) dbmethods.deleteItem(item.key);
                         }}
                       >
                         <DeleteIcon />
